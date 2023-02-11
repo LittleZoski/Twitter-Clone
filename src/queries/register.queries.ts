@@ -1,47 +1,50 @@
+import { valueGetters } from "@mantine/core/lib/Box/style-system-props/value-getters/value-getters";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { useRouter } from "next/router";
+import { useState } from "react";
 
-interface userRegisterInput {
-  username: string;
+type UserLoginInput = {
+    username: string;
+    password: string;
+  }
+
+type UserRegisterInput = {
   name: string;
-  password: string;
   workspace: string;
   termsOfService: boolean;
-}
-
-interface userLoginInput {
-  username: string;
-  password: string;
-}
+}  & UserLoginInput
 
 export function useRegister() {
   const router = useRouter();
-//   const login = useLogin();
+  const login = useLogin();
+const [userInfo, setUserInfo] = useState<UserRegisterInput>()
+
   return useMutation({
-    mutationFn: (values: userRegisterInput) => {
+    mutationFn: (values: UserRegisterInput) => {
+        setUserInfo(values);
       return axios
         .post("https://husqr.up.railway.app/register", values)
         .then((response) => response.data);
     },
-    onSuccess: (data) => login.mutate,
+    onSuccess: () => login.mutate({username:userInfo!.username, password:userInfo!.password}),
   });
 }
 
-// export function useLogin() {
+export function useLogin() {
 
-//     //pretend please
-//     const router = useRouter();
+    //pretend please
+    const router = useRouter();
   
-//     return useMutation({
-//       mutationFn: (values: userRegisterInput) => {
-//         return axios
-//           .post("https://husqr.up.railway.app/register", values)
-//           .then((response) => response.data);
-//       },
-//       onSuccess: (data) => router.push("/login"),
-//     });
-//   }
+    return useMutation({
+      mutationFn: (values:UserLoginInput) => {
+        return axios
+          .post("https://husqr.up.railway.app/register", values)
+          .then((response) => response.data);
+      },
+      onSuccess: (data) => router.push("/login"),
+    });
+  }
 
 
 // export const register = async (value: userRegisterInput) => {
