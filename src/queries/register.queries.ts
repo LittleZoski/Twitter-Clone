@@ -27,7 +27,7 @@ const [userInfo, setUserInfo] = useState<UserRegisterInput>()
         .post("https://husqr.up.railway.app/register", values)
         .then((response) => response.data);
     },
-    onSuccess: () => login.mutate({username:userInfo!.username, password:userInfo!.password}),
+    onSuccess: (data) => login.mutate,
   });
 }
 
