@@ -24,7 +24,7 @@ export function useRegister() {
         .post("https://husqr.up.railway.app/register", values)
         .then((response) => response.data);
     },
-    onSuccess: (data) => login.mutate,
+    onSuccess: (data) => console.log(data),
   });
 }
 
