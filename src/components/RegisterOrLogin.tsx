@@ -1,11 +1,16 @@
-import { register } from '@/queries/register.queries';
+
 import { Box, Button, Checkbox, Group, TextInput } from '@mantine/core';
-import { useForm } from '@mantine/form';
 import Link from 'next/link';
 import React from 'react'
+import { useForm } from '@mantine/form'
+import { useAuth } from '@/context/AuthProvider';
+import { useRouter } from 'next/router';
 
-function Register() {
+function RegisterOrLogin() {
     
+    const {login, register} = useAuth()
+    const router = useRouter()
+
     const form = useForm({
         initialValues: {
           username: '',
@@ -20,13 +25,23 @@ function Register() {
           username: (value) => (/^[0-9a-zA-Z]{1,12}$/.test(value) ? null : 'Invalid username'),
           name: (value) => (/^[0-9a-zA-Z]{1,12}$/.test(value) ? null : 'Invalid name'),
           password: (value) => (/^[0-9a-zA-Z]{1,12}$/.test(value) ? null : 'Invalid password'),
-          workspace: (value) => (/^[0-9a-zA-Z]{1,12}$/.test(value) ? null : 'Invalid username'),
+          // workspace: (value) => (/^[0-9a-zA-Z]{1,12}$/.test(value) ? null : 'Invalid username'),
         },
       });
+
+      const handleRegister = (username:string, name:string, password:string)=>{
+        register(username,name,password)
+      }
+
+      const handleLogin = (username:string, password:string)=>{
+        login(username, password)
+        router.push('/husqr')
+
+      }
     
       return (
         <Box sx={{ maxWidth: 300 }} mx="auto">
-          <form onSubmit={()=>form.onSubmit((values) => register(values))}>
+          <form >
             <TextInput
               withAsterisk
               label="username"
@@ -45,12 +60,7 @@ function Register() {
               placeholder="password"
               {...form.getInputProps('password')}
             />
-            <TextInput
-              withAsterisk
-              label="workspace"
-              placeholder="workspace"
-              {...form.getInputProps('workspace')}
-            />
+            
     
             <Checkbox
               mt="md"
@@ -59,11 +69,15 @@ function Register() {
             />
     
             <Group position="right" mt="md">
-              <Button type="submit"><Link href="/login">Register</Link></Button>
+              <Button type="button" onClick={(event)=> handleRegister(form.values.username,form.values.name, form.values.password)}>Register</Button>
+            </Group>
+
+            <Group position="right" mt="md">
+              <Button onClick={(event)=> handleLogin(form.values.username,form.values.password)}>login</Button>
             </Group>
           </form>
         </Box>
       );
 }
 
-export default Register
+export default RegisterOrLogin
