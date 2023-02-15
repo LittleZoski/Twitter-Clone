@@ -10,7 +10,7 @@ export interface users {
   about: string;
 }
 
-export function getUsers(){
+export function usegetUsers(){
   const {status, data} = useQuery({
     queryKey:['getUsers'],
     queryFn:()=>{
@@ -19,27 +19,35 @@ export function getUsers(){
   })
 }
 
-export function getUserWithId(id:number){
+export function usegetUserWithId(id:number){
   const {status, data} = useQuery({
     queryKey:['getUserwithID'],
     queryFn:()=>{
       return API.get<User>('/api/v1/users/'+id).then(res=>res.data)
     }
   })
+
+  if(status==="success"){
+    return data
+  }
 }
 
 
-export function getCurrentUser(){
+export function useGetCurrentUser(){
   const {status, data} = useQuery({
     queryKey:['getCurrentUser'],
     queryFn:()=>{
       return API.get<User>('/api/v1/users/me').then(res=>res.data)
     }
   })
+
+  if(status==="success"){
+    return data
+  }
 }
 
 //me is the current loged in user id
-export function patchCurrentUser(me:number, name:string, about:string ){
+export function usepatchCurrentUser(me:number, name:string, about:string ){
 
   const patchUserMutation = useMutation({
     mutationFn:({name, about }:{name:string, about:string})=>{
@@ -52,7 +60,7 @@ export function patchCurrentUser(me:number, name:string, about:string ){
 }
 
 
-export function getHusqsUserLikes(id:number){
+export function usegetHusqsUserLikes(id:number){
   const {status, data} = useQuery({
     queryKey:['getHusqsUserLikes'],
     queryFn:()=>{
@@ -61,7 +69,7 @@ export function getHusqsUserLikes(id:number){
   })
 }
 
-export function getHusqsUserFollower(id:number){
+export function usegetHusqsUserFollower(id:number){
   const {status, data} = useQuery({
     queryKey:['getHusqsUserFollower'],
     queryFn:()=>{
@@ -71,7 +79,7 @@ export function getHusqsUserFollower(id:number){
 }
 
 
-export function followUser(id:number){
+export function usefollowUser(id:number){
   const followUserMutation = useMutation({
     mutationFn:()=>{
       return API.post<User>(`/api/va/users/${id}/followers`).then(res=>res.data)
@@ -82,7 +90,7 @@ export function followUser(id:number){
 }
 
 //me here is current login user's id
-export function unfollowUser(id:number, me:number){
+export function useunfollowUser(id:number, me:number){
   const unfollowUserMutation = useMutation({
     mutationFn: ()=>{
       return API.delete(`/api/v1/users/${id}/follower/${me}`).then(res=>res.data)
@@ -92,7 +100,7 @@ export function unfollowUser(id:number, me:number){
   unfollowUserMutation.mutate()
 }
 
-export function getUserFromFollowing(id:number){
+export function usegetUserFromFollowing(id:number){
 
   const {status, data} = useQuery({
     queryKey: ['getUserFromFollowing'],
