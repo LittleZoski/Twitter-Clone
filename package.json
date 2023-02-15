@@ -10,11 +10,13 @@
   },
   "dependencies": {
     "@emotion/react": "^11.10.5",
+    "@emotion/server": "^11.10.0",
     "@mantine/core": "^5.10.3",
     "@mantine/form": "^5.10.3",
     "@mantine/hooks": "^5.10.3",
+    "@mantine/next": "^5.10.3",
     "@next/font": "13.1.6",
-    "@tanstack/react-query": "^4.24.4",
+    "@tanstack/react-query": "^4.24.6",
     "@types/node": "18.13.0",
     "@types/react": "18.0.27",
     "@types/react-dom": "18.0.10",
@@ -23,5 +25,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "typescript": "4.9.5"
+  },
+  "devDependencies": {
+    "prettier": "2.8.4"
   }
 }

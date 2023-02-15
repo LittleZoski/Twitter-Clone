@@ -1,7 +1,8 @@
-import { API } from "@/api";
+
 import { Husq } from "@/types/husq";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { User } from "@/types/user";
+import { API } from "@/api/api";
 
 export function useGetHusqs() {
   return useQuery({
