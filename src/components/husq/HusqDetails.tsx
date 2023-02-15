@@ -7,11 +7,12 @@ import LikeHusq from "./LikeHusq";
 
 function HusqDetails(husq: Husq) {
   //we're getting the authorId from the user. We can use that id to pull username from the user type.
-  const currentuserId = useGetCurrentUser()
-  const user = usegetUserWithId(currentuserId?.id!)
+
+  const user = usegetUserWithId(husq.authorId!)
+  
   return (
     <div>
-      <div>{user?.name}</div>
+      <div>{user?.username}</div>
       <div>{husq.text}</div>
       <LikeHusq></LikeHusq>
     </div>

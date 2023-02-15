@@ -21,9 +21,9 @@ export function usegetUsers(){
 
 export function usegetUserWithId(id:number){
   const {status, data} = useQuery({
-    queryKey:['getUserwithID'],
+    queryKey:['getUserwithID', id],
     queryFn:()=>{
-      return API.get<User>('/api/v1/users/'+id).then(res=>res.data)
+      return API.get<User>(`/api/v1/users/${id}`).then(res=>res.data)
     }
   })
 

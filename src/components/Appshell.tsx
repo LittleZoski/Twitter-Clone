@@ -89,7 +89,7 @@ export default function AppShellPage() {
           return <HusqrBox />;
         })}
 
-      
+      <HusqList/>
     </AppShell>
   );
 }
