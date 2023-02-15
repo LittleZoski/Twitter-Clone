@@ -1,13 +1,16 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from '@next/font/google'
-import styles from '@/styles/Home.module.css'
-import Login from '@/components/Register'
-import Register from '@/components/Register'
+import Head from "next/head";
+import Image from "next/image";
+import { Inter } from "@next/font/google";
+import styles from "@/styles/Home.module.css";
+import Login from "@/components/Register";
+import Register from "@/components/Register";
+import HusqList from "@/components/husq/HusqList";
+import { useGetHusqs } from "@/queries/husq.queries";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+  const data = useGetHusqs();
   return (
     <>
       <Head>
@@ -21,5 +24,5 @@ export default function Home() {
         <Register />
       </main>
     </>
-  )
+  );
 }
