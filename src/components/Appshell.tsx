@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 import {
   AppShell,
   Navbar,
@@ -9,39 +9,48 @@ import {
   MediaQuery,
   Burger,
   useMantineTheme,
-} from '@mantine/core';
-import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
-import { API } from '@/api/api';
+} from "@mantine/core";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import { API } from "@/api/api";
+import HusqrBox from "./husq/HusqBox";
+import CreateHusq from "./husq/CreateHusq";
 
 export default function AppShellPage() {
   const theme = useMantineTheme();
   const [opened, setOpened] = useState(false);
 
-  
-  const{status, data} = useQuery({
-      queryKey:["HusqrGet"],
-      queryFn: ()=>{return API.get("/api/v1/husqs").then(res=>res.data)},
-      
-  })
-  
+  const { status, data } = useQuery({
+    queryKey: ["HusqrGet"],
+    queryFn: () => {
+      return API.get("/api/v1/husqs").then((res) => res.data);
+    },
+  });
 
   return (
     <AppShell
       styles={{
         main: {
-          background: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0],
+          background:
+            theme.colorScheme === "dark"
+              ? theme.colors.dark[8]
+              : theme.colors.gray[0],
         },
       }}
       navbarOffsetBreakpoint="sm"
       asideOffsetBreakpoint="sm"
       navbar={
-        <Navbar p="md" hiddenBreakpoint="sm" hidden={!opened} width={{ sm: 200, lg: 300 }}>
+        <Navbar
+          p="md"
+          hiddenBreakpoint="sm"
+          hidden={!opened}
+          width={{ sm: 200, lg: 300 }}
+        >
           <Text>Application navbar</Text>
         </Navbar>
       }
       aside={
-        <MediaQuery smallerThan="sm" styles={{ display: 'none' }}>
+        <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
           <Aside p="md" hiddenBreakpoint="sm" width={{ sm: 200, lg: 300 }}>
             <Text>Application sidebar</Text>
           </Aside>
@@ -54,8 +63,10 @@ export default function AppShellPage() {
       }
       header={
         <Header height={{ base: 50, md: 70 }} p="md">
-          <div style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
-            <MediaQuery largerThan="sm" styles={{ display: 'none' }}>
+          <div
+            style={{ display: "flex", alignItems: "center", height: "100%" }}
+          >
+            <MediaQuery largerThan="sm" styles={{ display: "none" }}>
               <Burger
                 opened={opened}
                 onClick={() => setOpened((o) => !o)}
@@ -70,11 +81,12 @@ export default function AppShellPage() {
         </Header>
       }
     >
-      {data && data.map((item:any)=>{
-        return(
-          <div>{item.text}</div>
-        )
-      })}
+      <CreateHusq />
+
+      {data &&
+        data.map((item: any) => {
+          return <HusqrBox />;
+        })}
     </AppShell>
   );
 }
