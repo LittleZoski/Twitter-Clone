@@ -1,28 +1,27 @@
-import { valueGetters } from "@mantine/core/lib/Box/style-system-props/value-getters/value-getters";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
 type UserLoginInput = {
-    username: string;
-    password: string;
-  }
+  username: string;
+  password: string;
+};
 
 type UserRegisterInput = {
   name: string;
   workspace: string;
   termsOfService: boolean;
-}  & UserLoginInput
+} & UserLoginInput;
 
 export function useRegister() {
   const router = useRouter();
   const login = useLogin();
-const [userInfo, setUserInfo] = useState<UserRegisterInput>()
+  const [userInfo, setUserInfo] = useState<UserRegisterInput>();
 
   return useMutation({
     mutationFn: (values: UserRegisterInput) => {
-        setUserInfo(values);
+      setUserInfo(values);
       return axios
         .post("https://husqr.up.railway.app/register", values)
         .then((response) => response.data);
@@ -32,20 +31,18 @@ const [userInfo, setUserInfo] = useState<UserRegisterInput>()
 }
 
 export function useLogin() {
+  //pretend please
+  const router = useRouter();
 
-    //pretend please
-    const router = useRouter();
-  
-    return useMutation({
-      mutationFn: (values:UserLoginInput) => {
-        return axios
-          .post("https://husqr.up.railway.app/register", values)
-          .then((response) => response.data);
-      },
-      onSuccess: (data) => router.push("/login"),
-    });
-  }
-
+  return useMutation({
+    mutationFn: (values: UserLoginInput) => {
+      return axios
+        .post("https://husqr.up.railway.app/register", values)
+        .then((response) => response.data);
+    },
+    onSuccess: (data) => router.push("/login"),
+  });
+}
 
 // export const register = async (value: userRegisterInput) => {
 //   const registerPostBody = {
