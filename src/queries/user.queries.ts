@@ -22,7 +22,7 @@ export function getUsers(){
 export function getUserWithId(id:number){
   const {status, data} = useQuery({
     queryKey:['getUserwithID'],
-    queryFn:(id)=>{
+    queryFn:()=>{
       return API.get<User>('/api/v1/users/'+id).then(res=>res.data)
     }
   })
@@ -38,24 +38,67 @@ export function getCurrentUser(){
   })
 }
 
-
-export function patchCurrentUser(id:number, name:string, about:string ){
+//me is the current loged in user id
+export function patchCurrentUser(me:number, name:string, about:string ){
 
   const patchUserMutation = useMutation({
-    mutationFn:({id, name, about }:{id:number, name:string, about:string})=>{
-      return API.patch<User[]>('/api/v1/users/'+id, {"name":name, "about":about}).then(res=>res.data)
+    mutationFn:({name, about }:{name:string, about:string})=>{
+      return API.patch<User[]>(`/api/v1/users/${me}`, {"name":name, "about":about}).then(res=>res.data)
     }
   
   })
 
-  patchUserMutation.mutate({id,name,about})
+  patchUserMutation.mutate({name,about})
 }
 
-export function getHusqsUserLiked(id:number){
+
+export function getHusqsUserLikes(id:number){
   const {status, data} = useQuery({
-    queryKey:['getHusqsUserLiked'],
+    queryKey:['getHusqsUserLikes'],
     queryFn:()=>{
       return API.get<Husq[]>(`/api/v1/users/${id}/likes`).then(res=>res.data)
     }
   })
+}
+
+export function getHusqsUserFollower(id:number){
+  const {status, data} = useQuery({
+    queryKey:['getHusqsUserFollower'],
+    queryFn:()=>{
+      return API.get<User[]>(`/api/v1/users/${id}/followers`).then(res=>res.data)
+    }
+  })
+}
+
+
+export function followUser(id:number){
+  const followUserMutation = useMutation({
+    mutationFn:()=>{
+      return API.post<User>(`/api/va/users/${id}/followers`).then(res=>res.data)
+    }
+  })
+
+  followUserMutation.mutate()
+}
+
+//me here is current login user's id
+export function unfollowUser(id:number, me:number){
+  const unfollowUserMutation = useMutation({
+    mutationFn: ()=>{
+      return API.delete(`/api/v1/users/${id}/follower/${me}`).then(res=>res.data)
+    }
+  })
+
+  unfollowUserMutation.mutate()
+}
+
+export function getUserFromFollowing(id:number){
+
+  const {status, data} = useQuery({
+    queryKey: ['getUserFromFollowing'],
+    queryFn: ()=>{
+      return API.get(`/api/v1/users/${id}/follows`).then(res=>res.data)
+    }
+  })
+
 }
