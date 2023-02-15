@@ -15,6 +15,7 @@ import axios from "axios";
 import { API } from "@/api/api";
 import HusqrBox from "./husq/HusqBox";
 import CreateHusq from "./husq/CreateHusq";
+import HusqList from "./husq/HusqList";
 
 export default function AppShellPage() {
   const theme = useMantineTheme();
@@ -87,6 +88,8 @@ export default function AppShellPage() {
         data.map((item: any) => {
           return <HusqrBox />;
         })}
+
+      
     </AppShell>
   );
 }
