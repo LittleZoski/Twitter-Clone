@@ -7,8 +7,8 @@ function UserCard({ user }: { user: User }) {
     <Card shadow="sm" p="lg" radius="md" mb="lg" withBorder style={{width:400}}>
       <Card.Section>
         <Image
-          src={`https://picsum.photos/500/560?${Math.random()}`}
-          height={160}
+          src={`https://loremflickr.com/320/240/cat?${Math.random()}`}
+          height={250}
           alt={user.name}
         />
       </Card.Section>
