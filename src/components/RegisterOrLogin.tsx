@@ -43,7 +43,7 @@ function RegisterOrLogin() {
 
   const handleLogin = (username: string, password: string) => {
     login(username, password);
-    router.push("/husqr");
+    router.push("/");
   };
 
   return (

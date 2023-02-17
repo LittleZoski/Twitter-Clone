@@ -1,5 +1,5 @@
 //what user should see when a Husq renders
-import { useGetCurrentUser, usegetUserWithId } from "@/queries/user.queries";
+import { useGetCurrentUser, useGetUserWithId} from "@/queries/user.queries";
 import { Husq } from "@/types/husq";
 import { User } from "@/types/user";
 import React from "react";
@@ -13,7 +13,7 @@ function HusqDetails(husq: Husq) {
 
   return (
     <div>
-      <div>{user?.username}</div>
+      <div>{data?.username}</div>
       <div>{husq.text}</div>
       <LikeHusq />
     </div>
