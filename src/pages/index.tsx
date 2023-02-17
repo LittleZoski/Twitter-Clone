@@ -6,9 +6,5 @@ import HusqList from "@/components/husq/HusqList";
 import LikeHusq from "@/components/husq/LikeHusq";
 
 export default function Home() {
-  return (
-    <>
-      <LikeHusq />
-    </>
-  );
+  return <></>;
 }
