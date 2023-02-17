@@ -1,8 +1,21 @@
 import { User } from "@/types/user";
 import { Card, Image, Text, Badge, Button, Group } from "@mantine/core";
+import { useRouter } from "next/router";
 import React from "react";
 
 function UserCard({ user }: { user: User }) {
+
+  const router = useRouter()
+
+  const handleClick=(user:User)=>{
+    console.log(user)
+    router.push({
+      pathname:"/userHusqrList",
+      query:{myParam: JSON.stringify(user)}
+    })
+  }
+
+
   return (
     <Card shadow="sm" p="lg" radius="md" mb="lg" withBorder style={{width:400}}>
       <Card.Section>
@@ -35,7 +48,7 @@ function UserCard({ user }: { user: User }) {
         </Group>
       </Text>
 
-      <Button variant="light" color="blue" fullWidth mt="md" radius="md">
+      <Button variant="light" color="blue" fullWidth mt="md" radius="md" onClick={(event)=>handleClick(user)}>
         Inspec User Profile
       </Button>
     </Card>

@@ -4,15 +4,17 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { User } from "@/types/user";
 import { API } from "@/api/api";
 
-export function useGetHusqs() {
-  return useQuery({
+export function useGetHusqs(userId:number) {
+  const {status,data} = useQuery({
     queryKey: ["husqs"],
     queryFn: () => {
-      return API.get<Husq[]>("api/v1/husqs").then((response) => {
-        return response.data;
-      });
+      return API.get<Husq[]>(`api/v1/husqs/?userId=${userId}`).then((response) => 
+        response.data
+      );
     },
-  });
+  })
+
+  return {status, data}
 }
 
 export function useGetHusqsById(id: Husq["id"]) {
