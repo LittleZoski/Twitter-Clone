@@ -1,0 +1,165 @@
+body{
+  background-image: url("https://img.freepik.com/free-vector/sky-background-pastel-paper-cut-design-vector_53876-144660.jpg?w=1380&t=st=1676558215~exp=1676558815~hmac=ee29fb5d8433369d72b00d37123729651af1913062a466fc605975da44096503");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 805px;
+}
+
+.form{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  background-color: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(15px);
+  width: 600px;
+  height: 700px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  box-shadow: 5px 5px 5px 5px #00acee;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Poppins', sans-serif;
+  padding: 50px 35px;
+}
+
+#Layer_1, #wing1, #wing2{
+  margin-top: 65px;
+	height: 100px;
+  animation: fly 10s;
+  top: 0;
+	position: fixed;
+	z-index: 999;
+	pointer-events: none;
+  animation-iteration-count: 1;
+}
+
+#wing1{
+  transform-origin:center;
+  animation: flap 0.4s ease-out infinite alternate;
+}	
+#wing2{
+  transform-origin:center;
+  animation: flap 0.4s ease-in infinite alternate;
+}	 	
+@keyframes flap{
+ 50%{
+  transform:scaleX(-1) rotate(-45deg) translate(-40px,-40px);
+ }
+}
+
+@keyframes fly {
+  0%{
+      left:-1000px;
+  }
+  100%{
+      left:285px;
+  }
+}
+
+h1{
+  font-family:  'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}
+
+.register{
+  display: flex;
+  justify-content: center;
+}
+
+.login{
+  display: flex;
+  justify-content: center;
+}
+
+.icon{
+  display: flex;
+  margin-right: 10px;
+}
+
+header{
+  font-size: larger;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-weight: bold;
+  color: #00acee;
+}
+
+nav{
+  display: flex;
+  flex-direction: column;
+  padding-top: 10px;
+  float: right;
+}
+
+.nav-icons{
+  padding-right: 15px;
+}
+
+.link{
+  text-decoration: none;
+  margin-bottom: 50px;
+  color: black;
+  font-size: 30px;
+}
+
+.link:hover{
+  position: relative;
+  border-radius: 20px;
+  background:lightgrey;
+  box-shadow: 10px 0 0 lightgray, -20px 0 0 lightgray;
+}
+
+.link:visited{
+  color: black;
+}
+
+.search-box{
+  width: 100%;
+  position: relative;
+  display: flex;
+
+}
+.search-input{
+  width: 100%;
+  padding: 10px;
+  border: 3px solid #00acee;
+  border-radius:10px 0 0 10px ;
+  border-right: none;
+  outline: none;
+  font-size: 20px;
+  background: none;
+}
+.search-button{
+text-align: center;
+height: 51px;
+width: 40px;
+outline: none;
+cursor: pointer;
+border: 3px solid #00acee;
+border-radius: 0 10px 10px 0 ;
+border-left: none;
+background: none;
+font-size: 20px;
+border-left: 3px solid #00acee;
+}
+
+.tweet{
+  border-radius: 40px;
+  border: none;
+  height: 50px;
+  width: 250px;
+  color: white;
+  background-color: #00acee;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.container{
+  width: 35%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50% , -50%);
+}
