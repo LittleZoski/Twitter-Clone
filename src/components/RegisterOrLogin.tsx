@@ -1,51 +1,70 @@
-import { ActionIcon, Box, Button, Checkbox, Container, Group, TextInput } from '@mantine/core';
-import Link from 'next/link';
-import React from 'react'
-import { useForm } from '@mantine/form'
-import { useAuth } from '@/context/AuthProvider';
-import { useRouter } from 'next/router';
+import {
+  ActionIcon,
+  Box,
+  Button,
+  Checkbox,
+  Container,
+  Group,
+  TextInput,
+} from "@mantine/core";
+import Link from "next/link";
+import React from "react";
+import { useForm } from "@mantine/form";
+import { useAuth } from "@/context/AuthProvider";
+import { useRouter } from "next/router";
 
 function RegisterOrLogin() {
-    
-    const {login, register} = useAuth()
-    const router = useRouter()
+  const { login, register } = useAuth();
+  const router = useRouter();
 
-    const form = useForm({
-        initialValues: {
-          username: '',
-          name:'',
-          password:'',
-          workspace:'',
-          termsOfService: false
-          
-        },
-    
-        validate: {
-          username: (value) => (/^[0-9a-zA-Z]{1,12}$/.test(value) ? null : 'Invalid username'),
-          name: (value) => (/^[0-9a-zA-Z]{1,12}$/.test(value) ? null : 'Invalid name'),
-          password: (value) => (/^[0-9a-zA-Z]{1,12}$/.test(value) ? null : 'Invalid password'),
-          // workspace: (value) => (/^[0-9a-zA-Z]{1,12}$/.test(value) ? null : 'Invalid username'),
-        },
-      });
+  const form = useForm({
+    initialValues: {
+      username: "",
+      name: "",
+      password: "",
+      workspace: "",
+      termsOfService: false,
+    },
 
-      const handleRegister = (username:string, name:string, password:string)=>{
-        register(username,name,password)
-      }
+    validate: {
+      username: (value) =>
+        /^[0-9a-zA-Z]{1,12}$/.test(value) ? null : "Invalid username",
+      name: (value) =>
+        /^[0-9a-zA-Z ]{1,12}$/.test(value) ? null : "Invalid name",
+      password: (value) =>
+        /^[0-9a-zA-Z]{3,12}$/.test(value) ? null : "Invalid password",
+      // workspace: (value) => (/^[0-9a-zA-Z]{1,12}$/.test(value) ? null : 'Invalid username'),
+    },
+  });
 
-      const handleLogin = (username:string, password:string)=>{
-        login(username, password)
-        router.push('/husqr')
+  const handleRegister = (username: string, name: string, password: string) => {
+    register(username, name, password);
+  };
 
-      }
-    
-      return (
-        <>
-        <Box sx={{ maxWidth: 700 }} mx="auto" className='form'>
+  const handleLogin = (username: string, password: string) => {
+    login(username, password);
+    router.push("/husqr");
+  };
 
-          {/* Twitter Bird */}
-          <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	        viewBox="30 0 500 500" enable-background="new 0 0 400 400" xmlSpace="preserve">
-          <path id="body" fill="#00acee" d="M142.9,364.1c-1.6,1-3,1.7-4,2.3c-3,1.5-7.9,3.8-14.9,6.9c-7,3.1-14.7,5.7-23.1,7.9
+  return (
+    <>
+      <Box sx={{ maxWidth: 700 }} mx="auto" className="form">
+        {/* Twitter Bird */}
+        <svg
+          version="1.1"
+          id="Layer_1"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlnsXlink="http://www.w3.org/1999/xlink"
+          x="0px"
+          y="0px"
+          viewBox="30 0 500 500"
+          enable-background="new 0 0 400 400"
+          xmlSpace="preserve"
+        >
+          <path
+            id="body"
+            fill="#00acee"
+            d="M142.9,364.1c-1.6,1-3,1.7-4,2.3c-3,1.5-7.9,3.8-14.9,6.9c-7,3.1-14.7,5.7-23.1,7.9
 	        c-8.4,2.2-15.6,3.8-21.8,4.7c-6.2,0.9-12.2,1.5-18.1,1.8s-11.4,0.3-16.7,0c-5.2-0.3-8.5-0.5-9.6-0.6l-1.8-0.2l-0.4-0.1l-0.4-0.1v0.8
 	        h0.2l0.1,0.1l0.1,0.1l0.1,0.1l0.1,0.1l0.1,0.1H33l0.4,0.2l0.4,0.2l0.1,0.1l0.1,0.1l0.1,0.1l0.1,0.1l3.6,2.2c2.4,1.5,4.5,2.6,6.4,3.6
 	        s6.6,3.3,14.1,7.1c7.6,3.7,16.6,7.4,27.2,11.1s18.6,6.2,24,7.4c5.4,1.3,12.8,2.6,22.2,3.9s14.9,2.1,16.3,2.2
@@ -62,8 +81,12 @@ function RegisterOrLogin() {
 	        l-0.4,0.2l-0.4,0.2l-0.1,0.1c-0.1,0.1-0.8,0.4-1.9,1.2c-1.2,0.7-4.7,2.4-10.5,5s-11.6,5-17.5,7.1s-11.4,3.7-16.5,4.9
 	        s-8.8,0.5-11.3-1.9c-2.4-2.4-5.2-4.7-8.3-6.9c-3.1-2.2-6.5-4.3-10.4-6.4c-3.8-2.1-7.7-3.9-11.8-5.5c-4-1.6-8.6-2.9-13.5-3.8
 	        l-7.4-1.5h-20.5v0.1c0,0.1-1.7,0.4-5.1,0.9s-7.6,1.6-12.6,3.3c-5,1.7-10.4,4.2-16.3,7.4c-5.9,3.3-11.1,7-15.7,11.2
-	        s-8.3,8.3-11.2,12.2c-2.9,3.9-5.2,7.4-7,10.5C221.5,163.3,231.3,307,142.9,364.1z"/>
-          <path id="wing1" fill="#00acee" d="M233.2,181.5c-5-0.5-12.4-1.7-22.2-3.6c-9.8-1.8-16.8-3.3-20.8-4.5s-11.1-3.7-21.2-7.4
+	        s-8.3,8.3-11.2,12.2c-2.9,3.9-5.2,7.4-7,10.5C221.5,163.3,231.3,307,142.9,364.1z"
+          />
+          <path
+            id="wing1"
+            fill="#00acee"
+            d="M233.2,181.5c-5-0.5-12.4-1.7-22.2-3.6c-9.8-1.8-16.8-3.3-20.8-4.5s-11.1-3.7-21.2-7.4
 	        c-10.1-3.8-19.5-8-28.3-12.8c-8.8-4.7-16.8-9.5-24-14.4s-13.1-9.1-17.5-12.8c-4.5-3.7-7.1-6-7.9-7s-1.5-1.6-1.9-1.8
 	        c-0.5-0.2-3.2-2.7-8-7.6s-9.1-9.2-12.6-13.2l-5.3-5.9l-0.1-0.1l-0.1-0.1L63.1,90l-0.2-0.4l-0.1-0.1l-0.1-0.1l-0.1-0.1l-0.1-0.1
 	        l-0.1-0.1L62.3,89l-0.1-0.1l0,0.1l-0.1,0.1L62,89.2l0,0.1l-0.1,0.1L61.7,90l-0.2,0.6L57.9,98c-2.2,5-3.9,9.7-5.1,14.1
@@ -76,8 +99,12 @@ function RegisterOrLogin() {
 	        l-0.1,0.1l-0.1,0.1l-1,0.2l-1,0.2l-0.8,0.2c-0.5,0.1-1.9,0.4-4.3,0.8s-6.6,0.6-12.8,0.8c-6.2,0.1-10.7,0-13.5-0.4l-4.3-0.6L81,288
 	        l-0.6-0.1l0.1,0.4l0.1,0.4l0.2,0.6l0.2,0.6l3.2,7.2c2.2,4.8,4.4,9,6.7,12.7c2.3,3.7,5.1,7.2,8.3,10.7c3.2,3.5,5.8,6.2,7.9,8
 	        c2.1,1.9,5.3,4.3,9.9,7.2c4.6,2.9,9.3,5.4,14.1,7.4c4.9,2.1,9.4,3.7,13.5,4.7c4.2,1,7.3,1.6,9.2,1.8c1.9,0.1,4,0.3,6.1,0.4l3.1,0.2
-	        c117.9-117.9,82.9-167.7,82.9-167.7l-2.8-0.1C241.6,182.3,238.2,181.9,233.2,181.5z"/>
-          <path id="wing2" fill="#00acee" d="M233.2,181.5c-5-0.5-12.4-1.7-22.2-3.6c-9.8-1.8-16.8-3.3-20.8-4.5s-11.1-3.7-21.2-7.4
+	        c117.9-117.9,82.9-167.7,82.9-167.7l-2.8-0.1C241.6,182.3,238.2,181.9,233.2,181.5z"
+          />
+          <path
+            id="wing2"
+            fill="#00acee"
+            d="M233.2,181.5c-5-0.5-12.4-1.7-22.2-3.6c-9.8-1.8-16.8-3.3-20.8-4.5s-11.1-3.7-21.2-7.4
 	        c-10.1-3.8-19.5-8-28.3-12.8c-8.8-4.7-16.8-9.5-24-14.4s-13.1-9.1-17.5-12.8c-4.5-3.7-7.1-6-7.9-7s-1.5-1.6-1.9-1.8
 	        c-0.5-0.2-3.2-2.7-8-7.6s-9.1-9.2-12.6-13.2l-5.3-5.9l-0.1-0.1l-0.1-0.1L63.1,90l-0.2-0.4l-0.1-0.1l-0.1-0.1l-0.1-0.1l-0.1-0.1
 	        l-0.1-0.1L62.3,89l-0.1-0.1l0,0.1l-0.1,0.1L62,89.2l0,0.1l-0.1,0.1L61.7,90l-0.2,0.6L57.9,98c-2.2,5-3.9,9.7-5.1,14.1
@@ -90,49 +117,72 @@ function RegisterOrLogin() {
 	        l-0.1,0.1l-0.1,0.1l-1,0.2l-1,0.2l-0.8,0.2c-0.5,0.1-1.9,0.4-4.3,0.8s-6.6,0.6-12.8,0.8c-6.2,0.1-10.7,0-13.5-0.4l-4.3-0.6L81,288
 	        l-0.6-0.1l0.1,0.4l0.1,0.4l0.2,0.6l0.2,0.6l3.2,7.2c2.2,4.8,4.4,9,6.7,12.7c2.3,3.7,5.1,7.2,8.3,10.7c3.2,3.5,5.8,6.2,7.9,8
 	        c2.1,1.9,5.3,4.3,9.9,7.2c4.6,2.9,9.3,5.4,14.1,7.4c4.9,2.1,9.4,3.7,13.5,4.7c4.2,1,7.3,1.6,9.2,1.8c1.9,0.1,4,0.3,6.1,0.4l3.1,0.2
-	        c117.9-117.9,82.9-167.7,82.9-167.7l-2.8-0.1C241.6,182.3,238.2,181.9,233.2,181.5z"/>
-          </svg>
+	        c117.9-117.9,82.9-167.7,82.9-167.7l-2.8-0.1C241.6,182.3,238.2,181.9,233.2,181.5z"
+          />
+        </svg>
 
-          {/* Header */}
-          <h1>
-            Sign in to Husqr
-          </h1>
+        {/* Header */}
+        <h1>Sign in to Husqr</h1>
 
-          {/* Form */}
-            <form>
-              <TextInput
-                withAsterisk
-                label="username"
-                placeholder="username"
-                {...form.getInputProps('username')} style={{marginTop:"10px"}}/>
-              <TextInput
-                withAsterisk
-                label="name"
-                placeholder="name"
-                {...form.getInputProps('name')} />
-              <TextInput
-                withAsterisk
-                label="password"
-                placeholder="password"
-                {...form.getInputProps('password')}/>
+        {/* Form */}
+        <form>
+          <TextInput
+            withAsterisk
+            label="username"
+            placeholder="username"
+            {...form.getInputProps("username")}
+            style={{ marginTop: "10px" }}
+          />
+          <TextInput
+            withAsterisk
+            label="name"
+            placeholder="name"
+            {...form.getInputProps("name")}
+          />
+          <TextInput
+            withAsterisk
+            label="password"
+            placeholder="password"
+            {...form.getInputProps("password")}
+          />
 
+          <Checkbox
+            mt="md"
+            label="I agree to sell my privacy"
+            {...form.getInputProps("termsOfService", { type: "checkbox" })}
+            style={{ marginBottom: "40px" }}
+          />
 
-              <Checkbox
-                mt="md"
-                label="I agree to sell my privacy"
-                {...form.getInputProps('termsOfService', { type: 'checkbox' })} style={{marginBottom:"40px"}}/>
+          <Group position="right" mt="md" className="register">
+            <Button
+              type="button"
+              onClick={(event) =>
+                handleRegister(
+                  form.values.username,
+                  form.values.name,
+                  form.values.password
+                )
+              }
+              style={{ width: "200px" }}
+            >
+              Register
+            </Button>
+          </Group>
 
-              <Group position="right" mt="md" className='register'>
-                <Button type="button" onClick={(event) => handleRegister(form.values.username, form.values.name, form.values.password)} style={{width: '200px'}}>Register</Button>
-              </Group>
-
-              <Group position="right" mt="md" className='login'>
-                <Button onClick={(event) => handleLogin(form.values.username, form.values.password)} style={{width: '200px'}}>Sign in</Button>
-              </Group>
-            </form>
-          </Box>
-          </>
-      );
+          <Group position="right" mt="md" className="login">
+            <Button
+              onClick={(event) =>
+                handleLogin(form.values.username, form.values.password)
+              }
+              style={{ width: "200px" }}
+            >
+              Sign in
+            </Button>
+          </Group>
+        </form>
+      </Box>
+    </>
+  );
 }
 
-export default RegisterOrLogin
+export default RegisterOrLogin;
