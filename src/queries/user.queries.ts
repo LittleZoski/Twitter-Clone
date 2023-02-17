@@ -10,26 +10,30 @@ export interface users {
   about: string;
 }
 
-export function usegetUsers(){
+export function useGetUsers(LastItemId:number){
   const {status, data} = useQuery({
-    queryKey:['getUsers'],
+    queryKey:['getUsers', LastItemId],
     queryFn:()=>{
-      return API.get<User[]>('/api/v1/users/').then(res=>res.data)
-    }
+      return API.get<User[]>(`/api/v1/users/?cursor=${LastItemId}`).then(res=>res.data)
+    },
+    // enabled:!!LastItemId
   })
+  console.log(status)
+  return {status, data}
 }
 
 export function usegetUserWithId(id:number){
   const {status, data} = useQuery({
-    queryKey:['getUserwithID'],
+    queryKey:['getUserwithID', id],
     queryFn:()=>{
-      return API.get<User>('/api/v1/users/'+id).then(res=>res.data)
+      return API.get<User>(`/api/v1/users/${id}`).then(res=>res.data)
     }
   })
 
   if(status==="success"){
     return data
   }
+  return {}
 }
 
 

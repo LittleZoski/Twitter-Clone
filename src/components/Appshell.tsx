@@ -16,6 +16,7 @@ import { API } from "@/api/api";
 import HusqrBox from "./husq/HusqBox";
 import CreateHusq from "./husq/CreateHusq";
 import HusqList from "./husq/HusqList";
+import Link from "next/link";
 
 export default function AppShellPage() {
   const theme = useMantineTheme();
@@ -48,6 +49,7 @@ export default function AppShellPage() {
           width={{ sm: 200, lg: 300 }}
         >
           <Text>Application navbar</Text>
+          <Link href={"/users"}>Users</Link>
         </Navbar>
       }
       aside={
@@ -89,7 +91,7 @@ export default function AppShellPage() {
           return <HusqrBox />;
         })}
 
-      
+      <HusqList/>
     </AppShell>
   );
 }
