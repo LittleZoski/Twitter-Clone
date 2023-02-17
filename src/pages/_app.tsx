@@ -1,4 +1,5 @@
 import AuthGuard from "@/context/AuthGuard";
+import "@/styles/globals.scss";
 import { AuthProvider } from "@/context/AuthProvider";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import type { AppProps } from "next/app";
