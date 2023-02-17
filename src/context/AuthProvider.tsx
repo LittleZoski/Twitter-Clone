@@ -19,6 +19,8 @@ export function AuthProvider({children}:{children:JSX.Element}) {
     </AuthContext.Provider>
   )
 }
+
+
 export function useAuthContext(){
     const authContext = useContext(AuthContext)
     if(authContext) return authContext
