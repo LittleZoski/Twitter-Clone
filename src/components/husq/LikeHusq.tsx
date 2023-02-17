@@ -1,5 +1,7 @@
 import { useLikeHusq } from "@/queries/husq.queries";
 import React from "react";
+import { UnstyledButton, Group, Avatar } from "@mantine/core";
+import { IconHeart, IconHeartFilled } from "@tabler/icons";
 
 function LikeHusq() {
   //need to add useState for liked unliked status onClick
@@ -10,7 +12,13 @@ function LikeHusq() {
   function handleClick() {
     likeHusq.mutate(id);
   }
-  return <button onClick={handleClick}>Like Husq</button>;
+  return (
+    <UnstyledButton onClick={handleClick}>
+      <Group>
+        <Avatar size={40} color="blue"></Avatar>
+      </Group>
+    </UnstyledButton>
+  );
 }
 
 export default LikeHusq;

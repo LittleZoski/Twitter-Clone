@@ -33,7 +33,6 @@ export function usegetUserWithId(id:number){
   if(status==="success"){
     return data
   }
-  return {}
 }
 
 
