@@ -15,7 +15,7 @@ function HusqDetails(husq: Husq) {
     <div>
       <div>{user?.username}</div>
       <div>{husq.text}</div>
-      <LikeHusq id={husqId} />
+      <LikeHusq />
     </div>
   );
 }
