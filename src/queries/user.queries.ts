@@ -22,7 +22,7 @@ export function useGetUsers(LastItemId:number){
   return {status, data}
 }
 
-export function usegetUserWithId(id:number){
+export function useGetUserWithId(id:number){
   const {status, data} = useQuery({
     queryKey:['getUserwithID', id],
     queryFn:()=>{
@@ -30,10 +30,7 @@ export function usegetUserWithId(id:number){
     }
   })
 
-  if(status==="success"){
-    return data
-  }
-  return {}
+  return {status, data}
 }
 
 

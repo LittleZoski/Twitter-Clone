@@ -1,16 +1,29 @@
 import { useLikeHusq } from "@/queries/husq.queries";
-import React from "react";
+import React, { useState } from "react";
+import { UnstyledButton, Group, Avatar } from "@mantine/core";
+import { BsHeart, BsHeartFill } from "react-icons/bs";
+import { Husq } from "@/types/husq";
 
 function LikeHusq() {
   //need to add useState for liked unliked status onClick
-  const id = 12;
-
   const likeHusq = useLikeHusq();
+  const [liked, setLiked] = useState(false);
 
   function handleClick() {
-    likeHusq.mutate(id);
+    if (liked === false) {
+      setLiked(true);
+      // likeHusq.mutate(id);
+    } else {
+      setLiked(false);
+    }
   }
-  return <button onClick={handleClick}>Like Husq</button>;
+  return (
+    <UnstyledButton onClick={handleClick}>
+      <Group>
+        {liked ? <BsHeartFill color="#00acee" /> : <BsHeart color="#00acee" />}
+      </Group>
+    </UnstyledButton>
+  );
 }
 
 export default LikeHusq;

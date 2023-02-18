@@ -1,16 +1,15 @@
-
 import { Husq } from "@/types/husq";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { User } from "@/types/user";
 import { API } from "@/api/api";
 
-export function useGetHusqs() {
+export function useGetHusqs(userId: User["id"]) {
   return useQuery({
     queryKey: ["husqs"],
     queryFn: () => {
-      return API.get<Husq[]>("api/v1/husqs").then((response) => {
-        return response.data;
-      });
+      return API.get<Husq[]>(`api/v1/husqs/?userId=${userId}`).then(
+        (response) => response.data
+      );
     },
   });
 }

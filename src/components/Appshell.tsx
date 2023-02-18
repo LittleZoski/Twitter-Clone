@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import {
   AppShell,
   Navbar,
@@ -28,9 +28,12 @@ import {MdPersonOutline} from 'react-icons/md';
 import {BiEnvelope, BiBookmark} from  'react-icons/bi';
 import Link from 'next/link';
 
-<script src="https://kit.fontawesome.com/43dcc20e7a.js" crossOrigin="anonymous"></script>
+<script
+  src="https://kit.fontawesome.com/43dcc20e7a.js"
+  crossOrigin="anonymous"
+></script>;
 
-export default function AppShellPage() {
+export default function AppShellPage({ children }: { children: ReactNode }) {
   const theme = useMantineTheme();
   const [opened, setOpened] = useState(false);
 
@@ -161,14 +164,14 @@ export default function AppShellPage() {
                 mr="xl"
               />
             </MediaQuery>
-            <div className='icon'>
-              <AiOutlineTwitter size='3em'
-              style={{color: '#00acee'}}/>
+            <div className="icon">
+              <AiOutlineTwitter size="3em" style={{ color: "#00acee" }} />
             </div>
           </div>
         </Header>
       }
     >
+      {children}
     </AppShell>
   );
 }
