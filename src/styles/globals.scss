@@ -74,11 +74,6 @@ h1{
   justify-content: center;
 }
 
-.icon{
-  display: flex;
-  margin-right: 10px;
-}
-
 header{
   font-size: larger;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -116,10 +111,9 @@ nav{
 }
 
 .search-box{
-  width: 100%;
-  position: relative;
+  width: 260px;
   display: flex;
-
+  padding-bottom: 50px;
 }
 .search-input{
   width: 100%;
@@ -136,7 +130,6 @@ text-align: center;
 height: 51px;
 width: 40px;
 outline: none;
-cursor: pointer;
 border: 3px solid #00acee;
 border-radius: 0 10px 10px 0 ;
 border-left: none;
@@ -156,10 +149,29 @@ border-left: 3px solid #00acee;
   font-size: 20px;
 }
 
-.container{
-  width: 35%;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50% , -50%);
+.happenings{
+  background-color: #f5f5f5;
+}
+
+.articles{
+  border: none;
+  font-family: sans-serif;
+  background-color: transparent;
+  font-size: large;
+  font-weight: 600;
+  text-align: left;
+}
+
+.articles:hover{
+  position: relative;
+  background:lightgrey;
+}
+
+.follow-me{
+  margin-top: 30px;
+  background-color: #f5f5f5;
+}
+
+.img{
+  border-radius: 120px;
 }
