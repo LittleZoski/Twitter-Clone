@@ -1,12 +1,13 @@
 import { useGetUserWithId } from "@/queries/user.queries";
 import { Husq } from "@/types/husq";
 import { Card, Image, Text, Badge, Button, Group, Flex } from "@mantine/core";
-import React from "react";
+import React, { useState } from "react";
+import LikeHusq from "./LikeHusq";
 
 function HusqrBox({ husq }: { husq: Husq }) {
 
   
-
+  
 
   return (
     <Card
@@ -19,7 +20,7 @@ function HusqrBox({ husq }: { husq: Husq }) {
     >
       <Card.Section>
         <Image
-          src={`https://loremflickr.com/320/240/cat?${Math.random()}`}
+          src={`https://loremflickr.com/320/240/nature?${Math.random()}`}
           height={250}
           alt={husq.text}
         />
@@ -48,6 +49,8 @@ function HusqrBox({ husq }: { husq: Husq }) {
         <Button variant="light" color="blue" fullWidth mt="md" radius="md">
           unLike
         </Button>
+
+        <LikeHusq id={husq.id}/>
       </Flex>
     </Card>
   );

@@ -63,7 +63,7 @@ export default function AppShellPage({ children }: { children: ReactNode }) {
           <nav>
             <Link className="link" href="/">
               <i className='nav-icons'><RiHome7Fill /></i> Home</Link>
-            <Link className="link" href="/explore">
+            <Link className="link" href="/users">
               <i className='nav-icons'><FiUsers /></i> Users</Link>
             <Link className="link" href="/users">
               <i className='nav-icons'><FiBell /></i> Notifications</Link>

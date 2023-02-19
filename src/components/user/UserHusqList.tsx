@@ -13,7 +13,7 @@ function UserHusqList({user}:{user:User}) {
   return (
     <div style={{textAlign:"center", display:"flex", justifyContent:"center", alignItems:"center", flexDirection:"column"}}>
     {status === 'success' && data!==undefined && data.map((item)=>{
-      return <HusqBox husq={item}/>
+      return <HusqBox husq={item} key={item.id}/>
     })}
     </div>
     

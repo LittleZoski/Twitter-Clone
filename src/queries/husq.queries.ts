@@ -58,7 +58,7 @@ export function useGetHusqLikes(id: Husq["id"]) {
 
 export function useLikeHusq() {
   return useMutation({
-    mutationFn: (id: Husq["id"]) => {
+    mutationFn: (id: number) => {
       return API.post(`api/v1/husqs/${id}/likes`).then(
         (response) => response.data
       );
