@@ -78,6 +78,7 @@ export function useAuth() {
         
         queryClient.removeQueries({queryKey:["JWTdata"], exact:true})
         cookies.remove('loginBearerToken')
+        localStorage.clear()
         setAuthed(false)
     }
 

@@ -12,10 +12,14 @@ import React from "react";
 import { useForm } from "@mantine/form";
 import { useAuth } from "@/context/AuthProvider";
 import { useRouter } from "next/router";
+import { useLocalStorage } from "@mantine/hooks";
+import { DefaultValue } from "@mantine/core/lib/MultiSelect/DefaultValue/DefaultValue";
 
 function RegisterOrLogin() {
   const { login, register } = useAuth();
   const router = useRouter();
+  const [userlogin, setLogin] =useLocalStorage({key:'login', defaultValue: {Loginusername:'', Loginpassword:''}})
+
 
   const form = useForm({
     initialValues: {
@@ -39,10 +43,13 @@ function RegisterOrLogin() {
 
   const handleRegister = (username: string, name: string, password: string) => {
     register(username, name, password);
+    setLogin({Loginusername:username, Loginpassword:password})
+    handleLogin(username, password)
   };
 
   const handleLogin = (username: string, password: string) => {
     login(username, password);
+    setLogin({Loginusername:username, Loginpassword:password})
     router.push("/");
   };
 
