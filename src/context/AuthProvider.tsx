@@ -2,6 +2,7 @@ import { API } from '@/api/api'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useRouter } from 'next/router'
 import React, { createContext, Dispatch, SetStateAction, useContext, useState } from 'react'
+import { Cookies } from 'react-cookie'
 
 
 const AuthContext = createContext<{authed: boolean; setAuthed: Dispatch<SetStateAction<boolean>>}|undefined>(undefined)
@@ -30,8 +31,16 @@ export function useAuthContext(){
 
 export function useAuth() {
     const {authed, setAuthed} = useAuthContext()
-
+    const cookies = new Cookies()
     const router = useRouter()
+    const queryClient = useQueryClient()
+    const token = cookies.get('loginBearerToken')
+
+    if(token){
+        API.defaults.headers.common["Authorization"] = `Bearer ${token}`
+        setAuthed(true)
+    }
+
     const loginMutation = useMutation(
         
         {
@@ -40,28 +49,23 @@ export function useAuth() {
         API.post<{token:string}>("/login", {username, password}).then(res=> res.data),
         mutationKey:["JWTdata"],
         onSuccess: (data)=> {
-            
+            cookies.set('loginBearerToken',data.token, {path:'/'})
             API.defaults.headers.common["Authorization"] = `Bearer ${data.token}`
             setAuthed(true)
             console.log(data)
             console.log(authed)
         }
         }
-        
     )
-
 
     const registerMuation = useMutation(
         {
             mutationFn:({username,name,password,workspace}:{username:string, name:string, password:string,workspace:string})=>
-                API.post("/register",{username,name,password,workspace}).then(res=>{res.data, console.log(res.data)}),
-                 
+                API.post("/register",{username,name,password,workspace}).then(res=>{res.data, console.log(res.data)}),    
         }
     )
-    
     const login = (username: string, password: string) => {
         loginMutation.mutate({username,password})
-        
     }
     
     const register = (username:string,name:string,password:string) =>{
@@ -71,8 +75,9 @@ export function useAuth() {
     }
 
     const logout = ()=>{
-        const queryClient = useQueryClient()
+        
         queryClient.removeQueries({queryKey:["JWTdata"], exact:true})
+        cookies.remove('loginBearerToken')
         setAuthed(false)
     }
 

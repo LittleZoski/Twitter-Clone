@@ -4,6 +4,10 @@ import { Card, Image, Text, Badge, Button, Group, Flex } from "@mantine/core";
 import React from "react";
 
 function HusqrBox({ husq }: { husq: Husq }) {
+
+  
+
+
   return (
     <Card
       shadow="sm"
@@ -22,7 +26,7 @@ function HusqrBox({ husq }: { husq: Husq }) {
       </Card.Section>
 
       <Group position="apart" mt="md" mb="xs">
-        <Text weight={500}>User card</Text>
+        <Text weight={500}>Husqr card</Text>
         <Badge color="pink" variant="light">
           Hot
         </Badge>
