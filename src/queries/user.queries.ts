@@ -42,9 +42,7 @@ export function useGetCurrentUser(){
     }
   })
 
-  if(status==="success"){
-    return data
-  }
+  return {status,data}
 }
 
 //me is the current loged in user id

@@ -73,7 +73,7 @@ export default function AppShellPage({ children }: { children: ReactNode }) {
               <i className='nav-icons'><BiBookmark /></i> Bookmarks</Link>
             <Link className="link" href="/blue">
               <i className='nav-icons'><GoVerified /></i> Blue</Link>
-            <Link className="link" href="/profile">
+            <Link className="link" href="/myprofile">
               <i className='nav-icons'><MdPersonOutline /></i> Profile</Link>
             <Link className="link" href="/more">
               <i className='nav-icons'><CgMoreO /></i> More</Link>
