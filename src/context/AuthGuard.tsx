@@ -1,18 +1,15 @@
+import RegisterOrLogin from "@/components/registerorlogin/RegisterOrLogin";
+import React, { useContext } from "react";
+import { useAuthContext, useAuth } from "./AuthProvider";
 
-import RegisterOrLogin from '@/components/RegisterOrLogin'
-import React, { useContext } from 'react'
-import { useAuthContext, useAuth } from './AuthProvider'
+function AuthGuard({ children }: { children: JSX.Element }) {
+  const isAuth = useAuthContext();
 
-function AuthGuard({children}:{children:JSX.Element}) {
-
-
-  const isAuth = useAuthContext()
-
-  if(isAuth.authed){
-    return <>{children}</>
+  if (isAuth.authed) {
+    return <>{children}</>;
   }
-  
-  return <RegisterOrLogin />
+
+  return <RegisterOrLogin />;
 }
 
-export default AuthGuard
+export default AuthGuard;
