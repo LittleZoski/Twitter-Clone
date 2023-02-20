@@ -3,6 +3,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { User } from "@/types/user";
 import { API } from "@/api/api";
 
+
 export function useGetHusqs(userId: User["id"]) {
   return useQuery({
     queryKey: ["husqs"],
@@ -58,7 +59,7 @@ export function useGetHusqLikes(id: Husq["id"]) {
 
 export function useLikeHusq() {
   return useMutation({
-    mutationFn: (id: Husq["id"]) => {
+    mutationFn: (id: number) => {
       return API.post(`api/v1/husqs/${id}/likes`).then(
         (response) => response.data
       );
@@ -76,3 +77,5 @@ export function useDeleteLike(me: User["id"]) {
     },
   });
 }
+
+

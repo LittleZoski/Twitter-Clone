@@ -1,7 +1,9 @@
 import { API } from "@/api/api";
 import { Husq } from "@/types/husq";
 import { User } from "@/types/user";
+import { useLocalStorage } from "@mantine/hooks";
 import { useMutation, useQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
 
 export interface users {
   id: number;
@@ -35,6 +37,7 @@ export function useGetUserWithId(id:number){
 
 
 export function useGetCurrentUser(){
+  const [userId, setUserId] =useLocalStorage<number|null>({key:'currentUserId', defaultValue: null})
   const {status, data} = useQuery({
     queryKey:['getCurrentUser'],
     queryFn:()=>{
@@ -42,22 +45,26 @@ export function useGetCurrentUser(){
     }
   })
 
-  if(status==="success"){
-    return data
-  }
+  useEffect(()=>{
+    if(status==='success' && userId!= data.id){
+      setUserId(data.id)
+    }
+  },[])
+
+  return {status, data}
 }
 
 //me is the current loged in user id
-export function usepatchCurrentUser(me:number, name:string, about:string ){
-
+export function usePatchCurrentUser(){
+  const currentid = localStorage.getItem("currentUserId")
   const patchUserMutation = useMutation({
     mutationFn:({name, about }:{name:string, about:string})=>{
-      return API.patch<User[]>(`/api/v1/users/${me}`, {"name":name, "about":about}).then(res=>res.data)
+      return API.patch<User[]>(`/api/v1/users/${currentid}`, {"name":name, "about":about}).then(res=>{res.data, console.log(res.data)})
     }
   
   })
 
-  patchUserMutation.mutate({name,about})
+  return patchUserMutation.mutate
 }
 
 

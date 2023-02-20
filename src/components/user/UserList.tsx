@@ -24,7 +24,7 @@ function UserList() {
   return (
     <div style={{textAlign:"center", display:"flex", justifyContent:"center", alignItems:"center", flexDirection:"column"}}>
       {status === 'success' && data!==undefined && data.map((user)=>{
-      return <UserCard user={user}/>
+      return <UserCard user={user} key={user.id}/>
     })}
 
     {status==='success' && data!==undefined && <Button onClick={(event)=>{setLastItemId(data[data.length-1].id)}}>Next Page</Button>}

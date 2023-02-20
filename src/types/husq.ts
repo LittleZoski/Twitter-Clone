@@ -1,5 +1,5 @@
 export type Husq = {
-  id?: number;
+  id: number;
   createdAt: string;
   deleted: boolean;
   authorId: number;

@@ -6,11 +6,15 @@ import React from 'react'
 function userHusqrList() {
 
   const router = useRouter()
-  const myObject = JSON.parse(router.query.myParam as string)
-
-  return (
+  
+  if(router.query.myParam!== undefined){
+    const myObject = JSON.parse(router.query.myParam as string)
+    return (
     <UserHusqList user={myObject} />
   )
+  }
+  
+  
 }
 
 export default userHusqrList

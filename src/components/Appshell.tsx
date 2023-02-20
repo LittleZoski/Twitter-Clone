@@ -27,6 +27,7 @@ import {RiHome7Fill} from 'react-icons/ri';
 import {MdPersonOutline} from 'react-icons/md';
 import {BiEnvelope, BiBookmark} from  'react-icons/bi';
 import Link from 'next/link';
+import Logout from "./Logout";
 
 <script
   src="https://kit.fontawesome.com/43dcc20e7a.js"
@@ -62,7 +63,7 @@ export default function AppShellPage({ children }: { children: ReactNode }) {
           <nav>
             <Link className="link" href="/">
               <i className='nav-icons'><RiHome7Fill /></i> Home</Link>
-            <Link className="link" href="/explore">
+            <Link className="link" href="/users">
               <i className='nav-icons'><FiUsers /></i> Users</Link>
             <Link className="link" href="/users">
               <i className='nav-icons'><FiBell /></i> Notifications</Link>
@@ -72,10 +73,11 @@ export default function AppShellPage({ children }: { children: ReactNode }) {
               <i className='nav-icons'><BiBookmark /></i> Bookmarks</Link>
             <Link className="link" href="/blue">
               <i className='nav-icons'><GoVerified /></i> Blue</Link>
-            <Link className="link" href="/profile">
+            <Link className="link" href="/myprofile">
               <i className='nav-icons'><MdPersonOutline /></i> Profile</Link>
             <Link className="link" href="/more">
               <i className='nav-icons'><CgMoreO /></i> More</Link>
+              <Logout />
             <button className='tweet'>Husq</button>
           </nav>
           </div>
