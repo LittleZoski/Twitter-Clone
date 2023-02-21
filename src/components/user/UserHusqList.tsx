@@ -1,5 +1,5 @@
 import { useGetHusqs } from "@/queries/husq.queries";
-import { Text } from "@mantine/core";
+import { Stack, Text } from "@mantine/core";
 import { User } from "@/types/user";
 import React from "react";
 import HusqrBox from "../husq/HusqBox";
