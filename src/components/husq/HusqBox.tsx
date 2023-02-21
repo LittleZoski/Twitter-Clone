@@ -4,11 +4,7 @@ import { Card, Image, Text, Badge, Button, Group, Flex } from "@mantine/core";
 import React, { useState } from "react";
 import LikeHusq from "./LikeHusq";
 
-function HusqrBox({ husq }: { husq: Husq }) {
-
-  
-  
-
+function HusqBox({ husq }: { husq: Husq }) {
   return (
     <Card
       shadow="sm"
@@ -21,20 +17,18 @@ function HusqrBox({ husq }: { husq: Husq }) {
       <Card.Section>
         <Image
           src={`https://loremflickr.com/320/240/nature?${Math.random()}`}
-          height={250}
+          height={50}
           alt={husq.text}
         />
       </Card.Section>
 
       <Group position="apart" mt="md" mb="xs">
-        <Text weight={500}>Husqr card</Text>
         <Badge color="pink" variant="light">
           Hot
         </Badge>
       </Group>
 
       <Text size="sm" color="dimmed">
-        <Group>Husq id: {husq.id}</Group>
         <Group>created at: {husq.createdAt}</Group>
         <Group>Author: {useGetUserWithId(husq.authorId).data?.name}</Group>
         <Group>post: {husq.text}</Group>
@@ -43,17 +37,10 @@ function HusqrBox({ husq }: { husq: Husq }) {
       </Text>
 
       <Flex>
-        <Button variant="light" color="blue" fullWidth mt="md" radius="md">
-          Like
-        </Button>
-        <Button variant="light" color="blue" fullWidth mt="md" radius="md">
-          unLike
-        </Button>
-
-        <LikeHusq id={husq.id}/>
+        <LikeHusq id={husq.id} />
       </Flex>
     </Card>
   );
 }
 
-export default HusqrBox;
+export default HusqBox;
