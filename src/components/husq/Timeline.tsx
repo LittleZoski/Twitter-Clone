@@ -1,13 +1,11 @@
 import { useGetHusqs } from "@/queries/husq.queries";
-import { Stack, Text } from "@mantine/core";
-import { User } from "@/types/user";
-import React from "react";
-import HusqrBox from "../husq/HusqBox";
-import HusqBox from "../husq/HusqBox";
+import { useGetTimeline } from "@/queries/timeline.queries";
+import { useGetUserWithId } from "@/queries/user.queries";
+import { Text } from "@mantine/core";
+import HusqBox from "./HusqBox";
 
-function UserHusqList({ user }: { user: User }) {
-  const { status, data } = useGetHusqs(user.id);
-
+function Timeline() {
+  const { status, data } = useGetTimeline();
   if (status === "error") {
     return <div>error</div>;
   }
@@ -15,10 +13,9 @@ function UserHusqList({ user }: { user: User }) {
   if (status === "loading") {
     return <div>loading</div>;
   }
-
-  if (status === "success" && data !== undefined) {
+  if (status === "success" && data != undefined) {
     if (data.length === 0) {
-      return <Text>No husqs posted yet!</Text>;
+      return <Text>Follow your friends to see their husqs!</Text>;
     }
     return (
       <div
@@ -39,5 +36,4 @@ function UserHusqList({ user }: { user: User }) {
     return <div>else</div>;
   }
 }
-
-export default UserHusqList;
+export default Timeline;
