@@ -6,6 +6,7 @@ export type Husq = {
   text: string;
   replyId: number;
   _count: Count;
+  liked: boolean;
 };
 
 type Count = {

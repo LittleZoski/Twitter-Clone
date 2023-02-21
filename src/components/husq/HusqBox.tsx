@@ -34,8 +34,7 @@ function HusqBox({ husq }: { husq: Husq }) {
 
       <Group>
         <Group spacing={"xs"} px="10%">
-          <LikeHusq id={husq.id} />
-          <Text>{husq._count.likes}</Text>
+          <LikeHusq husq={husq} />
         </Group>
         <Group spacing={"xs"}>
           <Reply />
