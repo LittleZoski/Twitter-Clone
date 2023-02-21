@@ -3,7 +3,6 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { User } from "@/types/user";
 import { API } from "@/api/api";
 
-
 export function useGetHusqs(userId: User["id"]) {
   return useQuery({
     queryKey: ["husqs"],
@@ -26,7 +25,6 @@ export function useGetHusqsById(id: Husq["id"]) {
   });
 }
 
-//need to be able to update husq deleted to true
 export function useDeleteHusq() {
   return useMutation({
     mutationFn: (id: Husq["id"]) => {
@@ -77,5 +75,3 @@ export function useDeleteLike(me: User["id"]) {
     },
   });
 }
-
-
