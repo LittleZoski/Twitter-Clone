@@ -2,7 +2,8 @@ import { useGetUsers } from "@/queries/user.queries";
 import { User } from "@/types/user";
 import { Button } from "@mantine/core";
 import React, { useEffect, useState } from "react";
-import UserCard from "./UserBox";
+import UserCard from "./UserCard";
+
 
 function UserList() {
   const [LastItemId, setLastItemId] = useState(0);
