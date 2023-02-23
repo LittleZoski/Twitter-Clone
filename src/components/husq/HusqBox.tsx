@@ -91,9 +91,7 @@ function HusqBox({ husq }: { husq: Husq }) {
           </Group>
 
           <Group position="apart" spacing="xl">
-            <ActionIcon>
               <LikeHusq husq={husq} />
-            </ActionIcon>
             <Group>
               <button onClick={showReply}>Show Replies</button>
               <Text>{husq._count.replies}</Text>
