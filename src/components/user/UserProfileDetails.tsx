@@ -29,7 +29,7 @@ function UserProfileDetails({ user }: { user: User }) {
 				flexDirection: "column",
 			}}
 		>
-			<Card p="lg" radius="md" mb="lg" withBorder w="70%" miw="30vw" h="25vh">
+			<Card p="lg" radius="md" mb="lg" withBorder w="70%" miw="30vw" h="175px">
 				<Card.Section inheritPadding py="xs">
 					<Group >
 						<Avatar
