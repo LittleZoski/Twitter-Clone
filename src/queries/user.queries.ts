@@ -97,6 +97,9 @@ export function usegetHusqsUserFollower(id: number) {
       );
     },
   });
+  const currentUserId = Number(localStorage.getItem("currentUserId"));
+  const isFollowing = data?.some((user) => user.id === currentUserId) ?? false;
+  return { status, data, isFollowing}
 }
 
 export function usefollowUser() {

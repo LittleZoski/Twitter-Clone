@@ -17,6 +17,7 @@ import {
   Checkbox,
   Flex,
   Loader,
+  Avatar,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useLocalStorage } from "@mantine/hooks";
@@ -40,7 +41,7 @@ function UserCard({ user }: { user: User }) {
   const handleClick = (user: User) => {
     console.log(user);
     router.push({
-      pathname: "/userHusqrList",
+      pathname: "/user-profile",
       query: { myParam: JSON.stringify(user) },
     });
   };
@@ -71,9 +72,7 @@ function UserCard({ user }: { user: User }) {
 
   const handlefollow = (user: User) => {
     followUser.mutate(user.id);
-    if(followUser.isSuccess){
-      return(<>following {user.name} is success</>)
-    }
+    
   };
 
   const handleUnfollow = (user: User) => {
@@ -98,30 +97,37 @@ function UserCard({ user }: { user: User }) {
       withBorder
       style={{ width: 400 }}
     >
-      <Card.Section>
-        <Image
+      <Card.Section inheritPadding py="xs">
+        <Group>
+          <Avatar
           src={`https://loremflickr.com/320/240/cat?${Math.random()}`}
-          height={250}
-          
+          radius="xl"
           alt={currentuser.name}
-          
         />
+        
+        <Flex direction="column">
+          <Group><Text>{user.username}</Text><Text>id: {user.id}</Text></Group>
+          <Group><Text>{user.name}</Text></Group>
+        </Flex>
+
+        </Group>
+        
+        <Group color="dimmed" mt={20}>
+          <Text>Bio:</Text>
+          <Text>{user.about}</Text>
+        </Group>
+        
       </Card.Section>
 
-      <Group position="apart" mt="md" mb="xs">
+      {/* <Group position="apart" mt="md" mb="xs">
         <Text weight={500}>User card</Text>
         <Badge color="pink" variant="light">
           Followed By
         </Badge>
 
-      </Group>
-
-      <Text size="sm" color="dimmed">
-        <Group>User id: {data.id}</Group>
-        <Group>User name: {data.username}</Group>
-        <Group>user's real name: {data.name}</Group>
-        <Group>User Bio: {data.about}</Group>
-      </Text>
+      </Group> */}
+      
+      
 
       <Button
         variant="light"

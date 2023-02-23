@@ -22,11 +22,7 @@ function HusqBox({ husq }: { husq: Husq }) {
         </Group>
       </Card.Section>
 
-      {/* <Group position="apart" mt="md" mb="xs">
-        {/* <Badge color="pink" variant="light">
-          Hot
-        </Badge> */}
-      {/* </Group> */}
+      
 
       <Group position="apart" mt="md" mb="xs">
         <Text>{husq.text}</Text>
