@@ -1,5 +1,6 @@
 import { User } from "@/types/user";
 import { Card, Text, Group, Avatar } from "@mantine/core";
+import FollowUser from "./FollowUser";
 import NumberFollowers from "./NumberFollowers";
 import NumberFollowing from "./NumberFollowing";
 
@@ -14,7 +15,7 @@ function UserProfileDetails({ user }: { user: User }) {
       <Card.Section inheritPadding py="xs">
           <Avatar
             radius="xl"
-            src={`https://loremflickr.com/320/240/nature?${Math.random()}`}
+            src={`https://loremflickr.com/320/240/nature?${user.id}`}
           />
           <Text fz="25px"fw={700}>{user?.name}</Text>
           <Text fz="medium">@{user?.username}</Text>
@@ -24,10 +25,12 @@ function UserProfileDetails({ user }: { user: User }) {
                 <NumberFollowing id={user.id} />
                 <Text>Following</Text>
             </Group>
+            
             <Group>
               <NumberFollowers id={user.id}/>
               <Text>Followers</Text>
             </Group>
+            <FollowUser user={user}/>
         </Group>
 
       </Card.Section>
