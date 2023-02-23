@@ -1,3 +1,4 @@
+import FollowUser from '@/components/user/FollowUser'
 import UserHusqList from '@/components/user/UserHusqList'
 import UserProfileDetails from '@/components/user/UserProfileDetails'
 import { User } from '@/types/user'

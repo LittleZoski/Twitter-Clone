@@ -1,7 +1,8 @@
-import UserCard from "@/components/user/UserBox";
+
 import { useGetCurrentUser } from "@/queries/user.queries";
 import Timeline from "@/components/husq/Timeline";
 import React from "react";
+import UserCard from "@/components/user/UserCard";
 
 function myprofile() {
   const { status, data } = useGetCurrentUser();
