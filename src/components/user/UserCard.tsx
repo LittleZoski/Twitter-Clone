@@ -100,7 +100,7 @@ function UserCard({ user }: { user: User }) {
       <Card.Section inheritPadding py="xs">
         <Group>
           <Avatar
-          src={`https://loremflickr.com/320/240/cat?${Math.random()}`}
+          src={`https://loremflickr.com/320/240/cat?${user.id}`}
           radius="xl"
           alt={currentuser.name}
         />
