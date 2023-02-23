@@ -1,40 +1,37 @@
-import { Box, Button, Checkbox, Group, TextInput } from '@mantine/core'
-import { useForm } from '@mantine/form'
-import React from 'react'
+import { useCreateHusqs } from "@/queries/husq.queries";
+import { Box, Button, Checkbox, Group, TextInput } from "@mantine/core";
+import { useForm } from "@mantine/form";
+import React, { ChangeEvent, useState } from "react";
 
-function CreateHusq() {
+function CreateHusq({ replyId }: { replyId: number | undefined }) {
+  const form = useForm({});
+  const createHusq = useCreateHusqs();
+  const [text, setText] = useState("");
 
-  const form = useForm({
-    initialValues:{
-      inputtext:''
-    },
-    validate: {
-      inputtext:(value) => (/^[\s\w!@#$%^&*()-+=\[\]{};:'"\\|,.<>/?]{3,100}$/.test(value) ? null : 'Invalid Husqr')
-    }
+  const handleSubmit = () => {
+    createHusq.mutate({ text, replyId });
+  };
 
-  })
-  
-
-
+  const handleUpdate = (event: ChangeEvent<HTMLInputElement>) => {
+    setText(event.currentTarget.value);
+  };
 
   return (
-    
-    <Box sx={{ maxWidth: 300, borderStyle:'solid 10px #00FFBF' }} mx="auto" >
-      <form onSubmit={form.onSubmit((values) => console.log(values))}>
+    <Box sx={{ maxWidth: 300, borderStyle: "solid 10px #00FFBF" }} mx="auto">
+      <form onSubmit={form.onSubmit(handleSubmit)}>
         <TextInput
-          withAsterisk
-          label="Husq input"
-          placeholder="Your Husq"
-          {...form.getInputProps('inputtext')}
+          label="What's on your mind..."
+          placeholder="Can't go wrong with a message about corn!"
+          onChange={(event) => handleUpdate(event)}
+          onBlur={(event) => handleUpdate(event)}
         />
 
         <Group position="right" mt="md">
-          <Button type="submit">Submit</Button>
+          <Button type="submit">Send!</Button>
         </Group>
       </form>
     </Box>
-        
-  )
+  );
 }
 
-export default CreateHusq
+export default CreateHusq;

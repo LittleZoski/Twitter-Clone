@@ -5,11 +5,27 @@ import { BsHeart, BsHeartFill } from "react-icons/bs";
 import { Husq } from "@/types/husq";
 import { useGetCurrentUser } from "@/queries/user.queries";
 
+const LikePost = ({ liked, likes }: { liked: Boolean; likes: number }) => {
+  return (
+    <>
+      <Group>
+        {liked ? <BsHeartFill color="#00acee" /> : <BsHeart color="#00acee" />}
+        <Text>{likes}</Text>
+      </Group>
+    </>
+  );
+};
+
+const DisplayLikes = ({ likes }: { likes: number }) => {
+  return <Text>Likes: {likes}</Text>;
+};
+
 function LikeHusq({ husq }: { husq: Husq }) {
   //need to add useState for liked unliked status onClick
   const likeHusq = useLikeHusq();
   const currentUser = useGetCurrentUser().userId!;
   const unLikeHusq = useDeleteLike(currentUser);
+  const showLikeButton = husq.authorId != currentUser;
 
   const [liked, setLiked] = useState(husq.liked);
 
@@ -25,12 +41,15 @@ function LikeHusq({ husq }: { husq: Husq }) {
     }
   }
   return (
-    <UnstyledButton onClick={handleClick}>
-      <Group>
-        {liked ? <BsHeartFill color="#00acee" /> : <BsHeart color="#00acee" />}
-        <Text>{husq._count.likes}</Text>
-      </Group>
-    </UnstyledButton>
+    <Group>
+      {showLikeButton ? (
+        <UnstyledButton onClick={handleClick}>
+          <LikePost liked={liked} likes={husq._count.likes} />
+        </UnstyledButton>
+      ) : (
+        <DisplayLikes likes={husq._count.likes} />
+      )}
+    </Group>
   );
 }
 

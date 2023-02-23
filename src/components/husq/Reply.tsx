@@ -1,12 +1,43 @@
-import React from "react";
+import React, { ChangeEvent, useState } from "react";
 import { FaRegComment } from "react-icons/fa";
+import { useCreateHusqs } from "@/queries/husq.queries";
+import { ActionIcon, Box, Button, Group, TextInput } from "@mantine/core";
+import { useForm } from "@mantine/form";
 
-function Reply() {
+export const ReplyToHusq = () => {
+  const form = useForm({});
+  const createHusq = useCreateHusqs();
+  const [text, setText] = useState("");
+
+  const handleSubmit = () => {};
+
+  const handleUpdate = (event: ChangeEvent<HTMLInputElement>) => {
+    setText(event.currentTarget.value);
+  };
+
   return (
-    <div>
-      <FaRegComment color="#00acee" />
-    </div>
-  );
-}
+    <Box sx={{ maxWidth: 300, borderStyle: "solid 10px #00FFBF" }} mx="auto">
+      <form onSubmit={form.onSubmit(handleSubmit)}>
+        <TextInput
+          label="What's on your mind..."
+          placeholder="Can't go wrong with a message about corn!"
+          onChange={(event) => handleUpdate(event)}
+          onBlur={(event) => handleUpdate(event)}
+        />
 
-export default Reply;
+        <Group position="right" mt="md">
+          <Button type="submit">Send!</Button>
+        </Group>
+      </form>
+    </Box>
+  );
+};
+
+const handleClick = () => {};
+export const Reply = () => {
+  return (
+    <ActionIcon variant="transparent" onClick={handleClick}>
+      <FaRegComment color="#00acee" />
+    </ActionIcon>
+  );
+};
