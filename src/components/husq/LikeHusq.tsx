@@ -17,7 +17,7 @@ const LikePost = ({ liked, likes }: { liked: Boolean; likes: number }) => {
 };
 
 const DisplayLikes = ({ likes }: { likes: number }) => {
-  return <Text>Likes: {likes}</Text>;
+  return <Text fw={700}>Likes: {likes}</Text>;
 };
 
 function LikeHusq({ husq }: { husq: Husq }) {
