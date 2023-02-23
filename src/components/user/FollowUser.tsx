@@ -1,9 +1,9 @@
 import { useDeleteLike, useLikeHusq } from "@/queries/husq.queries";
 import React, { useState } from "react";
-import { UnstyledButton, Group, Avatar, Text } from "@mantine/core";
+import { Button, Group, Avatar, Text } from "@mantine/core";
 import {SlUserFollowing, SlUserUnfollow} from 'react-icons/sL'
 import { Husq } from "@/types/husq";
-import { usefollowUser, useGetCurrentUser, usegetHusqsUserFollower, useUnfollowUser } from "@/queries/user.queries";
+import { usefollowUser, useGetCurrentUser, useGetUserFollower, useUnfollowUser } from "@/queries/user.queries";
 import { User } from "@/types/user";
 
 function FollowUser({ user }: { user: User }) {
@@ -12,7 +12,7 @@ function FollowUser({ user }: { user: User }) {
   const currentUser = useGetCurrentUser().userId!;
   const unfollowUser = useUnfollowUser();
   const followUser = usefollowUser();
-  const UsersFollower = usegetHusqsUserFollower(user.id)
+  const UsersFollower = useGetUserFollower(user.id)
   
 
   const [followed, setfollow] = useState(UsersFollower.isFollowing);
@@ -29,11 +29,9 @@ function FollowUser({ user }: { user: User }) {
 
 
   return (
-    <UnstyledButton onClick={handleClick} >
-      <Group>
-        {followed ? <SlUserFollowing color="#00acee" style={{fontSize:'50px'}}/> : <SlUserUnfollow color="#00acee" style={{fontSize:'50px'}}/>}
-      </Group>
-    </UnstyledButton>
+    <Group>
+    { followed ? <Button onClick={handleClick} color="#00acee" >Unfollow</Button>: <Button onClick={handleClick} color="#00acee" >Follow</Button>}
+    </Group >
   );
 }
 
