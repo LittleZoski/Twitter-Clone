@@ -5,9 +5,9 @@ function NumberFollowers({ id }: { id: number }) {
 	const numberFollowers = useGetUserFollower(id).data?.length;
 
 	if (numberFollowers === 1) {
-		return <Text>{numberFollowers} follower</Text>;
+		return <Text fw={700}>{numberFollowers} follower</Text>;
 	}
-	return <Text>{numberFollowers} followers</Text>;
+	return <Text fw={700}>{numberFollowers} followers</Text>;
 }
 
 export default NumberFollowers;
