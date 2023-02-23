@@ -2,7 +2,7 @@ import { API } from "@/api/api";
 import { Husq } from "@/types/husq";
 import { User } from "@/types/user";
 import { useLocalStorage } from "@mantine/hooks";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
 
 export interface users {
@@ -22,7 +22,7 @@ export function useGetUsers(LastItemId: number) {
     },
     // enabled:!!LastItemId
   });
-  console.log(status);
+  console.log(data);
   return { status, data };
 }
 
@@ -60,19 +60,21 @@ export function useGetCurrentUser() {
 
 //me is the current loged in user id
 export function usePatchCurrentUser() {
-  const currentid = localStorage.getItem("currentUserId");
-  const patchUserMutation = useMutation({
+  const queryClient = useQueryClient()
+  return useMutation({
     mutationFn: ({ name, about }: { name: string; about: string }) => {
-      return API.patch<User[]>(`/api/v1/users/${currentid}`, {
+      return API.patch<User>(`/api/v1/users/${localStorage.getItem("currentUserId")}`, {
         name: name,
         about: about,
       }).then((res) => {
-        res.data, console.log(res.data);
+        return res.data
       });
     },
+    onSuccess:(data)=>{
+      queryClient.setQueryData(["getCurrentUser"], data )
+    }
   });
 
-  return patchUserMutation.mutate;
 }
 
 export function usegetHusqsUserLikes(id: number) {
@@ -86,7 +88,7 @@ export function usegetHusqsUserLikes(id: number) {
   });
 }
 
-export function usegetHusqsUserFollower(id: number) {
+export function useGetUserFollower(id: number) {
   const { status, data } = useQuery({
     queryKey: ["getHusqsUserFollower"],
     queryFn: () => {
@@ -95,38 +97,41 @@ export function usegetHusqsUserFollower(id: number) {
       );
     },
   });
+  const currentUserId = Number(localStorage.getItem("currentUserId"));
+  const isFollowing = data?.some((user) => user.id === currentUserId) ?? false;
+  return { status, data, isFollowing}
 }
 
-export function usefollowUser(id: number) {
-  const followUserMutation = useMutation({
-    mutationFn: () => {
-      return API.post<User>(`/api/va/users/${id}/followers`).then(
+export function usefollowUser() {
+  return useMutation({
+    mutationFn: (id: number) => {
+      return API.post<User[]>(`/api/v1/users/${id}/followers`).then(
         (res) => res.data
       );
     },
   });
 
-  followUserMutation.mutate();
+  
 }
 
 //me here is current login user's id
-export function useunfollowUser(id: number, me: number) {
-  const unfollowUserMutation = useMutation({
-    mutationFn: () => {
-      return API.delete(`/api/v1/users/${id}/follower/${me}`).then(
+export function useUnfollowUser() {
+  return useMutation({
+    mutationFn: (id: number) => {
+      return API.delete(`/api/v1/users/${id}/followers/${localStorage.getItem("currentUserId")}`).then(
         (res) => res.data
       );
     },
   });
 
-  unfollowUserMutation.mutate();
 }
 
-export function usegetUserFromFollowing(id: number) {
+export function useGetUserFollowing(id: number) {
   const { status, data } = useQuery({
     queryKey: ["getUserFromFollowing"],
     queryFn: () => {
       return API.get(`/api/v1/users/${id}/follows`).then((res) => res.data);
     },
   });
+  return {status, data};
 }

@@ -4,7 +4,7 @@ export type Husq = {
   deleted: boolean;
   authorId: number;
   text: string;
-  replyId: number;
+  replyId?: number;
   _count: Count;
   liked: boolean;
 };
