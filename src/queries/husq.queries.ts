@@ -2,6 +2,41 @@ import { Husq } from "@/types/husq";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { User } from "@/types/user";
 import { API } from "@/api/api";
+import axios from "axios";
+
+/**
+ *
+ * @param replyId - Determines the Husq the user is replying to. Is set to undefined if the user is creating a new Husq.
+ * @returns Placeholder data.s
+ */
+export function useCreateHusqs() {
+  return useMutation({
+    mutationFn: (values: { text: string; replyId?: number }) =>
+      API.post("api/v1/husqs/", { ...values }).then((response) => {
+        response.data, console.log(response.data);
+      }),
+  });
+}
+
+export function useReplyHusqs() {
+  return useMutation({
+    mutationFn: (values: { text: string; replyId: number }) =>
+      API.post("api/v1/husqs/", values).then((response) => {
+        response.data, console.log(response.data);
+      }),
+  });
+}
+
+export function useReplyHusq(userId: User["id"]) {
+  return useQuery({
+    queryKey: ["husqs"],
+    queryFn: () => {
+      return API.post<Husq[]>(`api/v1/husqs/?userId=${userId}`).then(
+        (response) => response.data
+      );
+    },
+  });
+}
 
 export function useGetHusqs(userId: User["id"]) {
   return useQuery({
