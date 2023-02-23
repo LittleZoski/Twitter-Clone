@@ -130,7 +130,7 @@ export function useGetUserFollowing(id: number) {
   const { status, data } = useQuery({
     queryKey: ["getUserFromFollowing"],
     queryFn: () => {
-      return API.get(`/api/v1/users/${id}/follows`).then((res) => res.data);
+      return API.get<User[]>(`/api/v1/users/${id}/follows`).then((res) => res.data);
     },
   });
   return {status, data};
