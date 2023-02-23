@@ -1,19 +1,18 @@
 import { useGetHusqs } from "@/queries/husq.queries";
 import { useGetTimeline } from "@/queries/timeline.queries";
 import { useGetUserWithId } from "@/queries/user.queries";
-import { Text } from "@mantine/core";
+import { Loader, LoadingOverlay, Text } from "@mantine/core";
 import HusqBox from "./HusqBox";
 
 function Timeline() {
   const { status, data } = useGetTimeline();
-  if (status === "error") {
-    return <div>error</div>;
+  if (status == "error") {
+    return <div>Page Failed to Load!</div>;
   }
-
-  if (status === "loading") {
-    return <div>loading</div>;
+  if (status == "loading") {
+    return <Loader color="indigo" size="xl" />;
   }
-  if (status === "success" && data != undefined) {
+  if (status == "success" && data != undefined) {
     if (data.length === 0) {
       return <Text>Follow your friends to see their husqs!</Text>;
     }
@@ -27,13 +26,13 @@ function Timeline() {
           flexDirection: "column",
         }}
       >
-        {data.map((husq) => (
-          <HusqBox husq={husq} key={husq.id} />
-        ))}
+        {data.map((husq) =>
+          husq.replyId == null ? <HusqBox husq={husq} key={husq.id} /> : null
+        )}
       </div>
     );
   } else {
-    return <div>else</div>;
+    return <div>We couldn't get your timeline, please try later!</div>;
   }
 }
 export default Timeline;

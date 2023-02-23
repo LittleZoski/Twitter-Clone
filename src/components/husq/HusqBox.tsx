@@ -9,29 +9,60 @@ import {
   ActionIcon,
   Loader,
 } from "@mantine/core";
-import { useDebouncedState } from "@mantine/hooks";
 import React, { useState } from "react";
 import { FaRegComment } from "react-icons/fa";
 import CreateHusq from "./CreateHusq";
 import DeleteHusq from "./DeleteHusq";
+import { HusqReplies } from "./HusqReplies";
 import LikeHusq from "./LikeHusq";
-import { Reply } from "./Reply";
 
 function HusqBox({ husq }: { husq: Husq }) {
   const user = useGetUserWithId(husq.authorId).data;
   const [opened, setOpened] = useState(false);
+  const [replyState, setReplyState] = useState(false);
+  const [targetSize, setTargetSize] = useState();
   const { userId, status } = useGetCurrentUser();
-
-  const handleReply = () => {
-    setOpened(!opened);
-  };
 
   if (status == "loading") {
     return <Loader />;
   }
 
+  const handleReply = () => {
+    setReplyState(true);
+    setOpened(true);
+  };
+
+  const showReply = () => {
+    setReplyState(false);
+    setOpened(true);
+  };
+
+  const ReplyBox = ({
+    replyState,
+    husq,
+  }: {
+    replyState: Boolean;
+    husq: Husq;
+  }) => {
+    return (
+      <>
+        {replyState ? (
+          <CreateHusq replyId={husq.id} />
+        ) : (
+          <HusqReplies id={husq.id} />
+        )}
+      </>
+    );
+  };
+
   return (
-    <Popover width="35%" position="bottom" opened={opened} onChange={setOpened}>
+    <Popover
+      width="35%"
+      position="bottom"
+      opened={opened}
+      onChange={setOpened}
+      withArrow={true}
+    >
       <Popover.Target>
         <Card
           shadow="sm"
@@ -56,30 +87,30 @@ function HusqBox({ husq }: { husq: Husq }) {
           </Card.Section>
 
           <Group position="apart" mt="md" mb="xs">
-            <Text>{husq.text}</Text>
+            <Text align="left">{husq.text}</Text>
           </Group>
 
-          <Group>
-            <Group spacing={"xs"} px="10%">
+          <Group position="apart" spacing="xl">
+            <ActionIcon>
               <LikeHusq husq={husq} />
+            </ActionIcon>
+            <Group>
+              <button onClick={showReply}>Show Replies</button>
+              <Text>{husq._count.replies}</Text>
             </Group>
-            <Group spacing={"xs"}>
+            <Group>
               <ActionIcon>
                 <FaRegComment color="#00acee" onClick={handleReply} />
               </ActionIcon>
               <Text>{husq._count.replies}</Text>
             </Group>
-            {userId && (
-              <Group spacing={"xs"}>
-                <DeleteHusq husq={husq} userId={userId} />
-              </Group>
-            )}
+            {userId && <DeleteHusq husq={husq} userId={userId} />}
           </Group>
         </Card>
       </Popover.Target>
 
       <Popover.Dropdown>
-        <CreateHusq replyId={husq.id} />
+        <ReplyBox replyState={replyState} husq={husq} />
       </Popover.Dropdown>
     </Popover>
   );

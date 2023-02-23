@@ -30,9 +30,9 @@ function UserHusqList({ user }: { user: User }) {
           flexDirection: "column",
         }}
       >
-        {data.map((husq) => (
-          <HusqBox husq={husq} key={husq.id} />
-        ))}
+        {data.map((husq) =>
+          husq.replyId == null ? <HusqBox husq={husq} key={husq.id} /> : null
+        )}
       </div>
     );
   } else {

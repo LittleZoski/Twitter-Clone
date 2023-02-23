@@ -12,7 +12,7 @@ export const AwesomeBird = () => {
         x="0px"
         y="0px"
         viewBox="30 0 500 500"
-        enable-background="new 0 0 400 400"
+        enableBackground="new 0 0 400 400"
         xmlSpace="preserve"
       >
         <path
