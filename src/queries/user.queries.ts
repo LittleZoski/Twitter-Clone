@@ -88,7 +88,7 @@ export function usegetHusqsUserLikes(id: number) {
   });
 }
 
-export function usegetHusqsUserFollower(id: number) {
+export function useGetUserFollower(id: number) {
   const { status, data } = useQuery({
     queryKey: ["getHusqsUserFollower"],
     queryFn: () => {
@@ -126,11 +126,12 @@ export function useUnfollowUser() {
 
 }
 
-export function usegetUserFromFollowing(id: number) {
+export function useGetUserFollowing(id: number) {
   const { status, data } = useQuery({
     queryKey: ["getUserFromFollowing"],
     queryFn: () => {
       return API.get(`/api/v1/users/${id}/follows`).then((res) => res.data);
     },
   });
+  return {status, data};
 }

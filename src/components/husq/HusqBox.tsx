@@ -22,7 +22,6 @@ function HusqBox({ husq }: { husq: Husq }) {
         </Group>
       </Card.Section>
 
-      
 
       <Group position="apart" mt="md" mb="xs">
         <Text>{husq.text}</Text>
