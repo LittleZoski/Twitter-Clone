@@ -8,13 +8,6 @@ function UserList() {
   const [cursorStack, setcursorStack] = useState<number[]>([0])
   const [LastItemId, setLastItemId] = useState(0);
   const { status, data } = useGetUsers(LastItemId);
-  
-  
-  // useEffect(() => {
-  //   if (status === "success" && data !== undefined && itemList[itemList.length-1]?.id < data[data.length-1].id)
-  //     setItemList((Previous) => [...Previous, ...data]);
-  //   console.log(itemList);
-  // }, [data]);
 
   return (
     <div
@@ -52,15 +45,15 @@ function UserList() {
         <Button
           radius="xl"
           onClick={(event) => {
-            // console.log(cursorStack)
+            console.log(cursorStack)
             // console.log(data)
             // const lastCursorId = cursorStack[cursorStack.length-1]
             const newStack = [...cursorStack]
             newStack.pop()
             console.log(newStack)
             const lastCursorId = newStack.pop()
-            // console.log(newStack)
-            // console.log(lastCursorId)
+            console.log(newStack)
+            console.log(lastCursorId)
             if(lastCursorId){
                setcursorStack([...newStack])
                 setLastItemId(lastCursorId)
