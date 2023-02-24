@@ -13,6 +13,7 @@ export interface users {
 }
 
 export function useGetUsers(LastItemId: number) {
+  console.log("last cursor id is" , LastItemId)
   const { status, data } = useQuery({
     queryKey: ["getUsers", LastItemId],
     queryFn: () => {
@@ -20,9 +21,9 @@ export function useGetUsers(LastItemId: number) {
         (res) => res.data
       );
     },
-    // enabled:!!LastItemId
+    
   });
-  console.log(data);
+  
   return { status, data };
 }
 

@@ -5,15 +5,16 @@ import React, { useEffect, useState } from "react";
 import UserCard from "./UserCard";
 
 function UserList() {
+  const [cursorStack, setcursorStack] = useState<number[]>([0])
   const [LastItemId, setLastItemId] = useState(0);
   const { status, data } = useGetUsers(LastItemId);
-  const [itemList, setItemList] = useState<User[]>([]);
-
-  useEffect(() => {
-    if (status === "success" && data !== undefined)
-      setItemList((Previous) => [...Previous, ...data]);
-    console.log(itemList);
-  }, [LastItemId]);
+  
+  
+  // useEffect(() => {
+  //   if (status === "success" && data !== undefined && itemList[itemList.length-1]?.id < data[data.length-1].id)
+  //     setItemList((Previous) => [...Previous, ...data]);
+  //   console.log(itemList);
+  // }, [data]);
 
   return (
     <div
@@ -35,7 +36,12 @@ function UserList() {
         <Button
           radius="xl"
           onClick={(event) => {
-            setLastItemId(data[data.length - 1].id);
+            let n = data[data.length-1].id
+            console.log(cursorStack)
+            console.log(data)
+            setcursorStack([...cursorStack, n])
+            setLastItemId(n);
+            
           }}
         >
           Next Page
@@ -46,7 +52,22 @@ function UserList() {
         <Button
           radius="xl"
           onClick={(event) => {
-            setLastItemId(itemList[itemList.length - 6].id);
+            // console.log(cursorStack)
+            // console.log(data)
+            // const lastCursorId = cursorStack[cursorStack.length-1]
+            const newStack = [...cursorStack]
+            newStack.pop()
+            console.log(newStack)
+            const lastCursorId = newStack.pop()
+            // console.log(newStack)
+            // console.log(lastCursorId)
+            if(lastCursorId){
+               setcursorStack([...newStack])
+                setLastItemId(lastCursorId)
+            }else{
+              setcursorStack([0])
+              setLastItemId(0)
+            }
           }}
         >
           Prev Page
