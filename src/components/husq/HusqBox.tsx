@@ -8,6 +8,7 @@ import {
   Popover,
   ActionIcon,
   Loader,
+  Button,
 } from "@mantine/core";
 import React, { useState } from "react";
 import { FaRegComment } from "react-icons/fa";
@@ -91,9 +92,17 @@ function HusqBox({ husq }: { husq: Husq }) {
           </Group>
 
           <Group position="apart" spacing="xl">
-              <LikeHusq husq={husq} />
+            <LikeHusq husq={husq} />
             <Group>
-              <button onClick={showReply}>Show Replies</button>
+              <Button
+                variant="outline"
+                radius="xl"
+                size="xs"
+                compact
+                onClick={showReply}
+              >
+                Show Replies
+              </Button>
               <Text>{husq._count.replies}</Text>
             </Group>
             <Group>

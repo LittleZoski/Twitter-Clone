@@ -70,7 +70,9 @@ export function useGetHusqsById(id: Husq["id"]) {
 export function useDeleteHusq() {
   return useMutation({
     mutationFn: (id: Husq["id"]) => {
-      return API.delete(`api/v1/husqs/${id}`).then((response) => response.data);
+      return API.delete(`api/v1/husqs/${id}`).then((response) =>
+        window.location.reload()
+      );
     },
   });
 }
