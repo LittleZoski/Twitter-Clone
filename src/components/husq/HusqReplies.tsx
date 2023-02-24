@@ -1,15 +1,6 @@
-import React, { ChangeEvent, useState } from "react";
 import { FaRegComment } from "react-icons/fa";
-import { useCreateHusqs, useGetHusqReplies } from "@/queries/husq.queries";
-import {
-  ActionIcon,
-  Box,
-  Button,
-  Group,
-  Loader,
-  TextInput,
-} from "@mantine/core";
-import { useForm } from "@mantine/form";
+import { useGetHusqReplies } from "@/queries/husq.queries";
+import { ActionIcon, Loader } from "@mantine/core";
 import HusqBox from "./HusqBox";
 
 export const HusqReplies = ({ id }: { id: number }) => {

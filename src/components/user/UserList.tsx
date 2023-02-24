@@ -4,7 +4,6 @@ import { Button } from "@mantine/core";
 import React, { useEffect, useState } from "react";
 import UserCard from "./UserCard";
 
-
 function UserList() {
   const [LastItemId, setLastItemId] = useState(0);
   const { status, data } = useGetUsers(LastItemId);
@@ -31,9 +30,10 @@ function UserList() {
         data.map((user) => {
           return <UserCard user={user} key={user.id} />;
         })}
-
+      <br />
       {status === "success" && data !== undefined && (
         <Button
+          radius="xl"
           onClick={(event) => {
             setLastItemId(data[data.length - 1].id);
           }}
@@ -41,13 +41,15 @@ function UserList() {
           Next Page
         </Button>
       )}
+      <br />
       {status === "success" && data !== undefined && (
         <Button
+          radius="xl"
           onClick={(event) => {
             setLastItemId(itemList[itemList.length - 6].id);
           }}
         >
-          Previous Page
+          Prev Page
         </Button>
       )}
     </div>
