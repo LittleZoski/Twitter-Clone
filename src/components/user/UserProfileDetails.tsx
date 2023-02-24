@@ -29,20 +29,23 @@ function UserProfileDetails({ user }: { user: User }) {
 				flexDirection: "column",
 			}}
 		>
-			<Card p="lg" radius="md" mb="lg" withBorder w="70%" miw="30vw" h="25vh">
+			<Card p="lg" radius="md" mb="lg" withBorder w="70%" miw="30vw" h="175px">
 				<Card.Section inheritPadding py="xs">
-					<Group>
+					<Group >
 						<Avatar
 							radius="xl"
 							src={`https://loremflickr.com/320/240/nature?${user.id}`}
-						/>
-						<FollowUser user={user} />
+            />
+            <Group align={"right"} spacing="xl">
+              <FollowUser user={user} />
+              </Group>
 					</Group>
 					<Text fz="25px" fw={700}>
 						{user?.name}
 					</Text>
 					<Text fz="medium">@{user?.username}</Text>
-					<Text>{user.about}</Text>
+          <Text>{user.about}</Text>
+          <br/>
 					<Group>
 						<UnstyledButton onClick={handleFollowingClick}>
 							<Group>
