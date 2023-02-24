@@ -1,18 +1,18 @@
-import { useAuth } from '@/context/AuthProvider'
-import { Button } from '@mantine/core'
-import React from 'react'
+import { useAuth } from "@/context/AuthProvider";
+import { Button } from "@mantine/core";
+import React from "react";
 
 function Logout() {
-  const {logout} = useAuth()
+  const { logout } = useAuth();
 
-  const handleClick =()=>{
-    logout()
-  }  
+  const handleClick = () => {
+    logout();
+  };
   return (
-    <Button mb="xl" onClick={handleClick}>
-        Logout
+    <Button mb="xl" radius="xl" onClick={handleClick}>
+      Logout
     </Button>
-  )
+  );
 }
 
-export default Logout
+export default Logout;

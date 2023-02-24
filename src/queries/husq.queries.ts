@@ -19,7 +19,9 @@ export function useCreateHusqs() {
   return useMutation({
     mutationFn: (values: { text: string; replyId?: number }) =>
       API.post("api/v1/husqs/", { ...values }),
-    onSuccess: () => {},
+    onSuccess: () => {
+      window.location.reload();
+    },
   });
 }
 
